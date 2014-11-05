@@ -1,0 +1,28 @@
+application: androidtv-codelabs
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /
+  mime_type: text/html
+  static_files: static/codelabs.html
+  upload: static/codelabs.html
+
+- url: /static/codelabs/1-androidtv-adding-leanback/
+  mime_type: text/html
+  static_files: static/codelabs/1-androidtv-adding-leanback/index.html
+  upload: static/codelabs/1-androidtv-adding-leanback/index.html
+
+- url: /completed/?
+  mime_type: text/html
+  static_files: static/completed.html
+  upload: static/completed.html
+
+- url: /metadata/
+  script: app.app
+
+- url: /static
+  application_readable: true
+  static_dir: static

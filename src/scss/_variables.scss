@@ -1,0 +1,49 @@
+// colors
+$c-pink: #ff5c92;
+$c-blue: #41a4f4;
+$c-light-blue: lighten($c-blue, 6%);
+$c-dark-blue: #445963;
+$c-light-gray: #eff2f3;
+$c-dark-gray: #6c6c6c;
+$c-white: #fff;
+
+// spacing
+$nav-h: 24px;
+$nav-vpad: 9px;
+$nav-outerh: $nav-h + ($nav-vpad * 2);
+$section-inner-pad: 48px;
+
+// media query
+$lg-media: 1480px;
+$md-media: 768px;
+
+// faqs
+$faq-icon-di: 16px;
+$faq-pad: 20px;
+
+// font sizes
+$f-lg: 48px;
+$f-md: 24px;
+$f-sm: 16px;
+
+// timing
+$timing-transitions: 200ms;
+
+// style mixins
+@mixin box-shadow() {
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+}
+@mixin titling() {
+  font-family: 'Roboto Condensed', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.125em;
+  font-weight: 300;
+}
+@mixin no-select() {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

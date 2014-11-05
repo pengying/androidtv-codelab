@@ -1,0 +1,34 @@
+{
+  "name": "its-hackademic",
+  "version": "2.7.3",
+  "homepage": "https://github.com/robdodson/polymer-polytechnic",
+  "authors": [
+    "Rob Dodson <robdodson@google.com>"
+  ],
+  "description": "it's hackademic, ya'll",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "core-elements": "Polymer/core-elements#^0.4.2",
+    "paper-elements": "Polymer/paper-elements#^0.4.2",
+    "flatiron-director": "PolymerLabs/flatiron-director#^0.4.0",
+    "highlightjs-element": "PolymerLabs/highlightjs-element#^0.4.2",
+    "marked-element": "PolymerLabs/marked-element#3bd94ab",
+    "event-map": "robdodson/event-map#^1.1.1",
+    "google-youtube": "GoogleWebComponents/google-youtube#~0.0.8"
+  },
+  "resolutions": {
+    "platform": "^0.4.0",
+    "core-component-page": "^0.4.0",
+    "polymer": "^0.4.0",
+    "marked-element": "3bd94ab",
+    "google-apis": "~0.3.2"
+  }
+}

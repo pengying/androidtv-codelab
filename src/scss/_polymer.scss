@@ -1,0 +1,33 @@
+.polymer {
+  background-color: $c-white;
+  @include box-shadow;
+  .col-full {
+    @include clearfix;
+    position: relative;
+  }
+  .polymer-icon {
+    width: 16%;
+    height: auto;
+    // float: left;
+    display: inline-block;
+    vertical-align: middle;
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+  .polymer-right {
+    // float: right;
+    width: 80%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 2%;
+  }
+  p {
+    // margin: 0;
+    // position: absolute;
+    // top: 50%;
+    // transform: translateY(-50%);
+  }
+}
