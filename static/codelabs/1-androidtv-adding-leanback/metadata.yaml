@@ -10,13 +10,12 @@ prerequisites:
   - Basic understanding of HTML, CSS, and web development
   - Knowledge of an MVC framework (helpful, but not required)
 
-level: Beginner
+level: Intermediate
 logo: p-logo-square.png
 categories:
   - AndroidTv
-duration: 60 min
+duration: 120 min
 keywords:
-  - Beginner
   - Chrome Dev Editor
   - Data binding
   - HTML5

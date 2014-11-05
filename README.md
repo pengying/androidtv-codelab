@@ -1,24 +1,21 @@
-# It's Hackademic!
+# AndroidTv Codelab
 
-## Start Grunt
+## Start
 
-1. `cd PATH/TO/PROJECT`
-2. `grunt`
-3. `http://localhost:8080/`
+dev_appserver.py ./
 
-## Vulcanizing
+## Upload to AppEngine
 
-If you're making changes to `static/imports.html` or `static/index.imports.html` make sure to run `static/vulcanize.sh` when you're finished for changes to show up.
+appcfg.py update ./
 
-## Releasing
+## Location of codelab
 
-Make sure to bump the version number in `bower.json`, `package.json` and `app.yaml`. This project follows semver for its version numbers, but `app.yaml` does not accept dots in a version number so replace them with dashes.
+/static/codelabs/1-androidtv-adding-leanback
 
-```
-ex: app.yaml
+## Updating metadata
 
-version: 2-1-0
-```
+The metadata must mach up with the .md files
+
 
 ## Source Locations
 |Output    |Source
