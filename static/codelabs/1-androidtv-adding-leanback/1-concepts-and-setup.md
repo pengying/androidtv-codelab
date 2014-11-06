@@ -61,7 +61,7 @@ Lets run it on a phone.
 <div class="stepbystep">
 <ul>
 <li>Connect your Android device or start an emulator.</li>
-<li>Select the checkpoint_0 configuration and click run. <img src="img/checkpoint_0_run.png"></li>
+<li>Select the `checkpoint_0` configuration and click run. <img src="img/checkpoint_0_run.png"></li>
 <li>Select your Android device and click ok.</li>
 </div>
 
@@ -81,94 +81,59 @@ Now lets see how it looks on AndroidTv.
 
 First we need to connect to the AndroidTv device.  In order to that you can use a male to male USB cable or adb connect.  In this codelab we'll cover the adb connect method.
 
+#### On the AndroidTv
+
+Lets enable developer mode if it's not yet enabled.
 <div class="stepbystep">
 <ul>
-<li>Open Settings
-<!-- Chrome Dev Editor callout block -->
+<li>Open <strong>Setting</strong></li>
+<li>Under preferences open <strong>Developer Options</strong></li>
 <aside class="callout">
-This codelab uses **Chrome Dev Editor**, a Chrome app IDE.
-<div class="kiosk">
-  Run Chrome Dev Editor by clicking its icon at the bottom of your screen:
-  <figure>
-    <img src="/static/images/app-icons/chrome_dev_editor_screenshot.png">
-  </figure>
-</div>
-
-<div class="extended">If you don't have it installed yet, please
-[install it from Chrome Web Store](https://chrome.google.com/webstore/detail/spark/pnoffddplpippgcfjdhbmhkofpnaalpg).</div>
+  If Developer Options doesn't display go into Device -> About, scroll down to **Build** and click **A** a few times until you receive the &quot;You're A Developer&quot; toast.  Then exit out of Settings and open Settings up again.
 </aside>
-<!-- End of Chrome Dev Editor callout block -->
-
-<div class="stepbystep">
-  <ul>
-    <li>
-      <a href="zips/PolymerApp.zip">Download the project source</a> and save it to your computer.
-    </li>
-    <li>
-      Unzip the project file, there should be one `PolymerApp` directory.
-    </li>
-  </ul>
+<li>Click <strong>Debugging</strong>.</li>
+<li>Change <strong>USB debugging</strong> to On</li>
+</ul>
 </div>
 
+Now we need to find the ip of the device.
 <div class="stepbystep">
-  <ul>
-    <li>
-      In Chrome Dev Editor, click <img src="img/hamburger.png" class="icon"> and select `Open Folder...`
-    </li>
-  </ul>
-  <div>
-    <img src="img/s1-open-folder.png" alt="open folder" style="height:250px;">
-  </div>
+<ul>
+<li>Back out to the main Settings page and click <strong>Network</strong>.</li>
+<li>Select the method that you've connected the device to your intranet.</li>
+<li>If you're using Wi-Fi, select the network you're currently connected to.</li>
+<li>Click on <strong>Status info</strong> and record your ip.</li>
+<li>If you're using ethernet select the Internet connection and record your ip.</li>
+</ul>
 </div>
 
-<div class="stepbystep">
-  <ul>
-    <li>
-      Select the `PolymerApp` directory to load it into the editor.
-    </li>
-  </ul>
-  <div>
-    <img src="img/s1-open-folder2.png" alt="open folder" style="height:190px;">
-  </div>
-</div>
+#### On your development machine
 
+Once you have the ip of the device, you can connect to it using adb connect in a terminal.
 
-You should see the following structure in your editor's sidebar.
+    adb connect [ip address]:4321
 
-    PolymerApp/
-      api/          <!-- a fake API for our app to consume -->
-      components/   <!-- installed dependencies from Bower -->
-      images/
-      post-service/ <!-- a component used in the tutorial -->
-      starter/      <!-- the starting point for your project! -->
-      step-2/       <!-- checkpoint steps, for reference -->
-      step-3/
-      step-4/
-      step-5/
-      .bowerrc      <!-- bower configuration file -->
-      .gitignore
-      bower.json    <!-- bower metadata file. Used for managing dependencies -->
+Sweet we're now connected.
 
-### Preview the app
+### Run the app on AndroidTv
 
-&rarr;  Open `starter/index.html` and hit the <img src="img/runbutton.png" class="icon"> button in the top toolbar to run the app.
+Lets run the app on AndroidTv.  In Android studio select checkpoint_0 and click run again.  This time the AndroidTv device should apper in the list of running devices.  Select it and click ok.
 
-Chrome Dev Editor fires up a web server and navigates to the `index.html` page. This is great way to preview changes as you make them.
+And now the mobile app is running on AndroidTv.  It could use some TV UI love right?  In the next few steps we'll cover adding some AndroidTv UI to the existing data sources and video player.
 
-<figure>
-  <img src="img/s1-first-run.png">
-  <figcaption>Preview of index.html</figcaption>
+<figure layout vertical center>
+  <img src="img/checkpoint_0_androidtv_screencap.png" alt="androidtv screencap" width="600px">
 </figure>
 
-You won't see much, just a grey background, but it at least lets us know that our server is running and we're ready to start hacking!
 
 ### Summary
 
-In this step, you learned how to:
+In this step you've learned about:
 
-- Load a project into Chrome Dev Editor
-- Run Chrome Dev Editor's web server to preview the app
+- AndroidTv and it's concepts
+- The codelab checkpoint_0 base
+- How to connect to AndroidTv devices and deploy apks
 
 ### Next up
 
-At this point the app doesn't do much. Let's add some code!
+Lets start creating the video browsing experience.
