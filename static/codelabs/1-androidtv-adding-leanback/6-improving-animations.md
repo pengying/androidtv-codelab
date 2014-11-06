@@ -9,10 +9,10 @@
 
 <h2>Step 1 - Create BackgroundHelper</h2>
 
-Create a class <code>BackgroundHelper<code>.
-	
-	public class BackgroundHelper {
+<p>Create a class <code>BackgroundHelper<code>.</p>
 
+	public class BackgroundHelper {
+		
 	    private static long BACKGROUND_UPDATE_DELAY = 200;
 		
 	    private final Handler mHandler = new Handler();
@@ -36,7 +36,6 @@ Create a class <code>BackgroundHelper<code>.
 	}
 
 <h2>Step 2 - Add an inner class PicassoBackgroundManagerTarget</h2>
-
 
     static class PicassoBackgroundManagerTarget implements Target {
         BackgroundManager mBackgroundManager;
@@ -95,7 +94,7 @@ Create a class <code>BackgroundHelper<code>.
 
 <h2>Step 5 - add a method <code>updateBackground</code> to load an image</h2>
 
-<p>We are using Picasso tp load and manipulate the image. Once done the instance of the PicassoBackgroundManagerTarget is used to apply the loaded image to the UI.</p>
+We are using Picasso tp load and manipulate the image. Once done the instance of the PicassoBackgroundManagerTarget is used to apply the loaded image to the UI.
 
     protected void updateBackground(String url) {
         Picasso.with(mActivity)
@@ -112,8 +111,7 @@ Create a class <code>BackgroundHelper<code>.
 
 
 <h2>Step 6 - add an inner class <code>UpdateBackgroundTask</code></h2>
-
-This is a subclass of <code>TimerTask</code> to be used to delay updating the background.
+<p>This is a subclass of <code>TimerTask</code> to be used to delay updating the background.</p>
 
     private class UpdateBackgroundTask extends TimerTask {
         @Override
@@ -131,7 +129,7 @@ This is a subclass of <code>TimerTask</code> to be used to delay updating the ba
 
 <h2>Step 7 - create the methods <code>startBackgroundTimer</code></h2>
 
-In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code>Timer</code> to update of the background.
+<p>In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code>Timer</code> to update of the background.</p>
 
     public void startBackgroundTimer() {
         if (null != mBackgroundTimer) {
@@ -144,7 +142,7 @@ In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code
 
 <h2>Step 8 - Create the class <code>BlurTransform</code></h2>
 
-This is an implementation of the interface <code>com.squareup.picasso</code> which we use to blur the image to be set as background. We start with a auto-generated dummy implementations of the required methods <code>transform</code> and <code>key</code>.
+<p>This is an implementation of the interface <code>com.squareup.picasso</code> which we use to blur the image to be set as background. We start with a auto-generated dummy implementations of the required methods <code>transform</code> and <code>key</code>.</p>
 
 	public class BlurTransform implements Transformation {
 	    @Override
@@ -220,16 +218,14 @@ The meat of this class is in the <code>transform</code> method which does the tr
 
 <h2>Step 11 - apply the transformation</h2>
 
-We complete the fluid calls top the Picasso library in the <code>updateBackground</code> method after the <code>centerCrop</code> call. Its pretty simple now.
+We complete the fluid calls to the Picasso library in the <code>updateBackground</code> method after the <code>centerCrop</code> call. Its pretty simple now.
 
 	.transform(BlurTransform.getInstance(mActivity))
 
 
 <h2>Step 12 - Add background helper to LeanbackBrowseFragment</h2>
 
-These classes are not used anywhere by now. We add it first to the <code>LeanbackBrowseFragment</code>.
-
-Add a member variable <code>bgHelper</code>.
+These classes are not used anywhere by now. We add it first to the <code>LeanbackBrowseFragment</code>. Add a member variable <code>bgHelper</code>.
 
     private BackgroundHelper bgHelper;
 
