@@ -1,14 +1,12 @@
-title: "Polymer: Your first application"
-summary: "In this tutorial, you’ll build a small Polymer application – a very
-basic client for a social networking service."
+title: "AndroidTv: Adding Leanback to your app"
+summary: "In this codelab we'll learn how to quickly convert an existing mobile web app
+into a fluid 10 foot experience by leveraging the Leanback fragments."
 
-description: "This project will introduce you to most of the key concepts in
-working with Polymer. Don’t worry if you don’t understand everything. Each of
-the concepts presented here is described in detail in the Polymer documentation."
+description: "This codelab will introduce you to the key concepts of the Leanback fragments.
+You can then leverage these fragments to easily and quickly create a Tv optimized experience in your app."
 
 prerequisites:
-  - Basic understanding of HTML, CSS, and web development
-  - Knowledge of an MVC framework (helpful, but not required)
+  - Understanding of Android
 
 level: Intermediate
 logo: p-logo-square.png
@@ -16,33 +14,27 @@ categories:
   - AndroidTv
 duration: 120 min
 keywords:
-  - Chrome Dev Editor
-  - Data binding
-  - HTML5
-  - Node
-  - Polymer
-  - Web Components
+  - AndroidTv
+  - Leanback
+  - Android
 
 steps:
   -
-    title: "Getting set up"
-    blurb: "Scaffold a new Polymer application using the Chrome Dev Editor."
+    title: "Concepts and setup"
+    blurb: "Introduction to Leanback and setting up Android Studio project."
   -
-    title: "Creating the app structure"
-    blurb: "Use some pre-built Polymer elements to create the basic application
-    structure, with a toolbar and tabs."
+    title: "Creating a skeleton video browser activity"
+    blurb: "We'll cover the concepts of the Leanback BrowseFragment and create the skeleton
+     of the video browser activity."
   -
-    title: "Creating your own element"
-    blurb: "Create a <post-card> element that controls the layout and styling of
-    its children"
+    title: "Creating the video browser"
+    blurb: "In this step, We'll cover a few more concepts and finish creating the video browser."
   -
-    title: "Using data binding"
-    blurb: "Pull data from a web service and use Polymer’s data binding to
-    render it as a series of cards."
+    title: "Creating the video details activity"
+    blurb: "We'll extend Leanback video details fragment to create a view to show the details of a video."
   -
-    title: "Finishing touches"
-    blurb: "Finish up the app by adding a favorite button to the cards and
-    connecting the tabs to the <post-list> control"
+    title: "Creating recommendations that display on the home screen"
+    blurb: "Now we'll cover creating the recommendations that display on AndroidTv's home screen."
   -
-    title: "That's all folks"
-    blurb: "More resources..."
+    title: "Polishing the animations"
+    blurb: "Finally, we'll add a little more detail to the animations by modifying and get the whole app running."
