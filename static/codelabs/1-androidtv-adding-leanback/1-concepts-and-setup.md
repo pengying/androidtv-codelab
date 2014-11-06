@@ -1,6 +1,6 @@
 <toc-element></toc-element>
 
-### The Goal
+### The goal
 
 In this codelab, you'll learn how to quickly enable a mobile app for AndroidTv using the Leanback library.  At the end of the codelab you can expect to have a UX compliant single apk for mobile devices and AndroidTv.
 
@@ -9,7 +9,7 @@ In this codelab, you'll learn how to quickly enable a mobile app for AndroidTv u
 To start off lets learn a little bit about AndroidTv.  What is AndroidTv and how is it different?  At it's core, it is Android so most of the things that you've learned developing your mobile app can be reused.  The key difference is input and the presentation of information.
 
 <figure layout vertical center>
-  <img src="img/tv.png" alt="androidtv">
+  <img src="img/tv.png" alt="androidtv" class="noborder">
 </figure>
 
 AndroidTv is designed for the 10 foot experience.  Instead of a touchscreen, users will be navigating using a controller.  Instead of swiping the notification bar down, the notifications will be displayed as the top row of cards.  And the screen is always filled with rich visual content.
@@ -38,7 +38,7 @@ The first thing we need to do is get the mobile app to build on.
 In the project directory open up `build.gradle` with Android Studio.
 
 ### Understanding the starter project
-All right, checkpoint_0 is the base app that we'll be building upon. <img src="img/checkpoint_0.png">
+All right, `checkpoint_0` is the base app that we'll be building upon. <img src="img/checkpoint_0.png">
 
 Each of the following checkpoints can be used as reference points to check your work or for help if you encounter any issues.
 

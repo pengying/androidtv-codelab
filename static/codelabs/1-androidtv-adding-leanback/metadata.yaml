@@ -20,7 +20,7 @@ keywords:
 steps:
   -
     title: "Concepts and setup"
-    blurb: "Introduction to AndroidTv and Leanback and setting up Android Studio project."
+    blurb: "An introduction to AndroidTv and Leanback."
   -
     title: "Creating a skeleton video browser activity"
     blurb: "We'll cover the concepts of the Leanback BrowseFragment and create the skeleton
