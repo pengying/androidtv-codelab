@@ -1,8 +1,20 @@
-<h1>Goal of checkpoint 3: Add an activity to show details of a video</h1>
+<h1>Create the video detail fragment</h1>
 
-<h2>Step 1: Create a new Activity VideoDetailsActivity in the fastlane package</h2>
+<h2>Goal of checkpoint 3: Add an activity to show details of a video</h2>
 
-<p>In order to display details of an activity we have to create a new Activity:</p>
+* show details of a video in a dedicated Activity
+* offer an action to play the video to start the video player
+* show related videos in an extra row below the detail info
+
+<b style="color: red">TBD: add screenshot of detail view with related content</b>
+
+<h2>Concepts</h2>
+
+The Leanback library offers ready to use components to create a detail view for a video clip. The detail view shows additonal information about the video and actions like play. Goal of checkpoint 3 is to create an additional Activity containing a <a href="https://developer.android.com/reference/android/support/v17/leanback/app/DetailsFragment.html">DetailsFragment</a> of the Leanback library which is populated with the model data by leveraging the <a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter">Model-View-Presenter pattern</a>. 
+
+<h2>Step 1: Create a new activity <code>VideoDetailsActivity</code> in the fastlane package</h2>
+
+<p>In order to display details of an activity we have to create a new class <code>VideoDEtailsActivity</code>:</p>
 
 	public class VideoDetailsActivity extends Activity {
 	    @Override
@@ -12,7 +24,7 @@
 	    }
 	}
 
-<p>The content view is defined in R.layout.activity_leanback_details which we have to create:<p>
+<p>The content view is defined in <code>R.layout.activity_leanback_details</code> which we have to create:<p>
 
 <code><pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -23,9 +35,9 @@
 /&gt;</pre></code>
 
 
-<h2>Step 2: Add the new activity to android_manifest.xml</h2>
+<h2>Step 2: Add the new activity to <i>AndroidManifest.xml</i></h2>
 
-<p>Every Activity needs to be registered in the AndroidManifest.xml so we do:</p>
+<p>Every Activity needs to be registered in the <i>AndroidManifest.xml</i> so we do:</p>
 
 <code><pre>&lt;activity
 android:name=&quot;.fastlane.VideoDetailsActivity&quot;
@@ -37,7 +49,7 @@ android:exported=&quot;true&quot;&gt;
 
 <h2>Step 3: Create VideoDetailsFragment</h2>
 
-<p>The layout file of the VideoDetailsActivity references the VideoDetailsFragment which extends the DetailsFragment:</p>
+<p>The layout file of the <code>VideoDetailsActivity</code> references the <code>VideoDetailsFragment</code> which extends the <a href="https://developer.android.com/reference/android/support/v17/leanback/app/DetailsFragment.html">DetailsFragment</a>:</p>
 
    	public class VideoDetailsFragment extends DetailsFragment {
 
@@ -63,13 +75,13 @@ android:exported=&quot;true&quot;&gt;
 	    }
 	}
 	
-<h2>Step 4: Show the VideoDetailActivity when an item is clicked</h2>
+<h2>Step 4: Show the <code>VideoDetailActivity</code> when an item is clicked</h2>
 
-<p>Register an OnItemViewClickedListener in the init method of the LeanbackBrowseFragment:</p>
+<p>Register an <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/OnItemViewClickedListener.html"><code>OnItemViewClickedListener</code></a> in the init method of the <code>LeanbackBrowseFragment</code>:</p>
 
     setOnItemViewClickedListener(getDefaultItemViewClickedListener());
 
-<p>and create the method getDefaultItemViewClickerListener:</p>
+<p>and create the method <code>getDefaultItemViewClickerListener</code>:</p>
 
     private OnItemViewClickedListener getDefaultItemViewClickedListener() {
 		return new OnItemViewClickedListener() {
@@ -84,12 +96,12 @@ android:exported=&quot;true&quot;&gt;
 		};
     }
 
-<p>As we now pass the Video element with an Intent we need a key LeanbackActivity.VIDEO for it and make the data/Video class Serializable.</p>
+<p>As we now pass the <code>Video</code> object with an <code>Intent</code> we need a key <code>LeanbackActivity.VIDEO</code> for it and make the data/Video class <code>Serializable</code>.</p>
 
 
 <h2>Step 5: Use the Model-View-Presenter pattern to display the details of the video</h2>
 
-<p>The project now compiles and can be run but does not show anything. To make that happen we use a presenter from the Model-View-Presenter pattern which is leveraged by the Leanback library. We create the class DetailsDescriptionPresenter which is responsible to put the values of the model (the Video class) to a ViewHolder:</p>
+<p>The project now compiles and can be run but does not show anything. To make that happen we use a presenter from the Model-View-Presenter pattern which is leveraged by the Leanback library. We create the class DetailsDescriptionPresenter deriven from the <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/AbstractDetailsDescriptionPresenter.html"><code>AbstractDetailsDescriptionPresenter</code></a> which is responsible to put the values of the model (the Video class) to a ViewHolder:</p>
 
 	public class DetailsDescriptionPresenter
 		extends AbstractDetailsDescriptionPresenter {
@@ -110,7 +122,7 @@ android:exported=&quot;true&quot;&gt;
 
 <h2>Step 6: Create async task to load image</h2>
 
-<p>To put the presenter in use we have to make the VideoDetailFragment smarter. Much smarter. We add an inner class DetailRowBuilderTask to the fragment which to load the image:</p>
+<p>To put the presenter in use, we have to make the <code>VideoDetailFragment</code> smarter. We add an inner class <code>DetailRowBuilderTask</code> to the fragment which to load the image:</p>
 
 	private class DetailRowBuilderTask extends AsyncTask&lt;Video, Integer, DetailsOverviewRow&gt; {
 
@@ -143,7 +155,7 @@ android:exported=&quot;true&quot;&gt;
 
 <h2>Step 7: Create presenter when the task has executed</h2>
 	
-<p>The Picasso library loads and and resized the image off the UI thread. After it has completed we create the presenters in the onPostExecute method of the AsyncTask and set the adapter of the DetailsFragment</p> 
+<p>The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and resized the image off the UI thread. After it has completed we create the presenters in the <code>onPostExecute</code> method of the <code>AsyncTask</code> and set the adapter of the <code>DetailsFragment</code></p> 
 
     @Override
     protected void onPostExecute(DetailsOverviewRow detailRow) {
@@ -189,13 +201,13 @@ android:exported=&quot;true&quot;&gt;
 
 <h2>Step 9: Display a row of related videos below the detail panel</h2>
 
-<p>As an extra step we want to add a row of videos related to the one shown in detail. To do this we only have to add another presenter and adapter in the <code>onPostExecute</code> of the AsyncTask.</p>
+<p>As an extra step we want to add a row of videos related to the one shown in detail. To do this we only have to add another presenter and adapter in the <code>onPostExecute</code> of the <code>AsyncTask</code>.</p>
 
 <p>We first add an additional presenter</p>
 
     ps.addClassPresenter(ListRow.class, new ListRowPresenter());
 	
-<p>Accordinlgy the ArrayObjectAdapter requires an additional ListRow to be added. We create a new ListRow to which we pass a HeaderItem and a CursorObjectAdapater in the constructor</p>
+<p>Accordinlgy the <code>ArrayObjectAdapter</code> requires an additional <code>ListRow</code> to be added. We create a new <code>ListRow</code> to which we pass a <code>HeaderItem</code> and a <code>CursorObjectAdapater</code> in the constructor</p>
 
 	String subcategories[] = {
 		You may also like"
