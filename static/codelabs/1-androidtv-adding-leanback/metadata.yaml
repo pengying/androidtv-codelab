@@ -2,8 +2,7 @@ title: "AndroidTv: Adding Leanback to your app"
 summary: "In this codelab we'll learn how to quickly convert an existing mobile web app
 into a fluid 10 foot experience by leveraging the Leanback fragments."
 
-description: "This codelab will introduce you to the key concepts of the Leanback fragments.
-You can then leverage these fragments to easily and quickly create a Tv optimized experience in your app."
+description: "This codelab will introduce you to the key Android Tv concepts and the Leanback fragments.  We will then walk through adding Android Tv functionality to an existing mobile video app using Leanback fragments."
 
 prerequisites:
   - Understanding of Android
@@ -21,7 +20,7 @@ keywords:
 steps:
   -
     title: "Concepts and setup"
-    blurb: "Introduction to Leanback and setting up Android Studio project."
+    blurb: "Introduction to AndroidTv and Leanback and setting up Android Studio project."
   -
     title: "Creating a skeleton video browser activity"
     blurb: "We'll cover the concepts of the Leanback BrowseFragment and create the skeleton
