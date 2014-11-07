@@ -1,8 +1,8 @@
-title: "AndroidTv: Adding Leanback to your app"
+title: "Android TV: Adding Leanback to your app"
 summary: "In this codelab we'll learn how to quickly convert an existing mobile web app
 into a fluid 10 foot experience by leveraging the Leanback fragments."
 
-description: "This codelab will introduce you to the key Android Tv concepts and the Leanback fragments.  We will then walk through adding Android Tv functionality to an existing mobile video app using Leanback fragments."
+description: "This codelab will introduce you to the key Android TV concepts and the Leanback fragments.  We will then walk through adding Android TV functionality to an existing mobile video app using Leanback fragments."
 
 prerequisites:
   - Understanding of Android
@@ -13,27 +13,27 @@ categories:
   - AndroidTv
 duration: 120 min
 keywords:
-  - AndroidTv
+  - Android TV
   - Leanback
   - Android
 
 steps:
   -
     title: "Concepts and setup"
-    blurb: "An introduction to AndroidTv and Leanback."
+    blurb: "An introduction to Android TV and Leanback."
   -
     title: "Creating a skeleton video browser activity"
     blurb: "We'll cover the concepts of the Leanback BrowseFragment and create the skeleton
      of the video browser activity."
   -
-    title: "Creating the video browser"
+    title: "Loading content on your video browser fragment."
     blurb: "In this step, We'll cover a few more concepts and finish creating the video browser."
   -
     title: "Creating the video details activity"
     blurb: "We'll extend Leanback video details fragment to create a view to show the details of a video."
   -
     title: "Creating recommendations that display on the home screen"
-    blurb: "Now we'll cover creating the recommendations that display on AndroidTv's home screen."
+    blurb: "Now we'll cover creating the recommendations that display on Android TV's home screen."
   -
     title: "Polishing the animations"
     blurb: "Finally, we'll add a little more detail to the animations by modifying and get the whole app running."

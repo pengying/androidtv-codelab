@@ -86,7 +86,7 @@ First we need to connect to the Android TV device.  In order to that you can use
 Lets enable developer mode if it's not yet enabled.
 <div class="stepbystep">
 <ul>
-<li>Open <strong>Setting</strong></li>
+<li>Open <strong>Settings</strong></li>
 <li>Under preferences open <strong>Developer Options</strong></li>
 <aside class="callout">
   If Developer Options doesn't display go into Device -> About, scroll down to **Build** and click **A** a few times until you receive the &quot;You're A Developer&quot; toast.  Then exit out of Settings and open Settings up again.
@@ -113,7 +113,7 @@ Once you have the ip of the device, you can connect to it using adb connect in a
 
     adb connect [ip address]:4321
 
-Sweet we're now connected.
+Sweet, we're now connected!
 
 ### Run the app on Android TV
 
@@ -122,7 +122,7 @@ Lets run the app on Android TV.  In Android studio select checkpoint_0 and click
 And now the mobile app is running on Android TV.  It could use some TV UI love right?  In the next few steps we'll cover adding some Android TV UI to the existing data sources and video player.
 
 <figure layout vertical center>
-  <img src="img/checkpoint_0_Android TV_screencap.png" alt="Android TV screencap" width="600px">
+  <img src="img/checkpoint_0_androidTv_screencap.png" alt="Android TV screencap" width="600px">
 </figure>
 
 
@@ -132,7 +132,7 @@ In this step you've learned about:
 
 - Android TV and it's concepts
 - The codelab checkpoint_0 base
-- How to connect to Android TV devices and deploy apks
+- How to connect to Android TV devices and deploy APKs
 
 ### Next up
 
