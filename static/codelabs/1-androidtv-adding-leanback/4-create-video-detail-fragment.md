@@ -8,9 +8,8 @@ In this step, you'll learn about:
 -   Creating an action to play the video to start the video player.
 -   Displaying related videos in an row below the detail card.
 
-<b style="color: red">TBD: add screenshot of detail view with related content</b>
 <div layout vertical center>
-  <img class="sample" src="img/s4-card.png" style="border: 1px solid #ccc;">
+  <img class="sample" src="img/details-overview-row.png" style="border: 1px solid #ccc;">
 </div>
 
 ### Creating a new activity VideoDetailsActivity
@@ -31,15 +30,13 @@ The content view is defined in <code>R.layout.activity_leanback_details</code> w
 /&gt;</pre></code>
 
 Next, create an activity class that uses the layout shown in the previous code example:
-<code><pre>
-public class VideoDetailsActivity extends Activity {
+<code><pre>public class VideoDetailsActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leanback_details);
     }
-}
-</pre></code>
+}</pre></code>
 
 
 ### Adding the new activity to <i>AndroidManifest.xml</i>
