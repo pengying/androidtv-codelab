@@ -8,10 +8,8 @@ In this step, you'll learn about:
 
 -   Providing a home screen banner
 -   Using Leanback theme
--   Declaring a TV Activity
--   Creating Fragment that extends BrowseFragment
--   Adding BrowseFragment to a layout
--   Creating LeanbackActivity
+-   Declaring and creating a TV Activity
+-   Creating Fragment that extends BrowseFragment and adding to a Layout
 
 <div layout vertical center>
   <img class="sample" src="img/s3-card.png" style="border: 1px solid #ccc;">
@@ -63,7 +61,7 @@ The following code snippet shows how to include this intent filter in your manif
 
 Caution: If you do not include the CATEGORY_LEANBACK_LAUNCHER intent filter in your app, it is not visible to users running the Google Play store on TV devices. Also, if your app does not have this filter when you load it onto a TV device using developer tools, the app does not appear in the TV user interface.
 
-### Creating LeanbackActivity
+### Creating our TV Activity: LeanbackActivity
 
 Create leanback launcher activity. The activity should set the view to the activity_leanback layout that will include the BrowseFragment.
 
