@@ -106,9 +106,9 @@ Since certain features are not available on TV, you need to define their require
 </pre>
 </aside>
 
-### Add an Android TV app icon
+### Add an Android TV app banner
 
-Add `android:banner` under the application element to define the app icon.
+Add `android:banner` under the application element to define the app banner.  The banner is the app launch point that appears on the home screen in the apps and games rows.
 
 <pre>
 &lt;application
@@ -121,12 +121,12 @@ We've included Leanback libraries, and now Android TV will launch into the corre
 
 ### Create a fragment that extends BrowseFragment
 
-We'll leverage the Leanback [`BrowseFragment`](https://developer.android.com/reference/android/support/v17/leanback/app/BrowseFragment.html) which renders rows of elements.
-
+We'll leverage the Leanback [`BrowseFragment`](https://developer.android.com/reference/android/support/v17/leanback/app/BrowseFragment.html).  The BrowseFragment class in the leanback library allows you to create a primary layout for browsing categories and rows of media items with a minimum of code.
 
 <figure layout vertical center>
   <img src="img/browse_fragment.png" alt="browse fragment" class="noborder">
 </figure>
+
 
 
 The first step is to create a class that extends BrowseFragment.
@@ -139,7 +139,7 @@ Next lets fill out the class a little bit
 
     private ArrayObjectAdapter mRowsAdapter;
 
-&rarr; We'll also add a helper function to initialize the fragment.  In it we instantiate `mRowsAdapter`, set it as the Adapter for the fragment then set our main color.
+&rarr; We'll also add a helper function to initialize the fragment.  In it we instantiate `mRowsAdapter`, set it as the Adapter for the fragment then set our main color and badge which appears in the top right of the browse view.
 
     public void init() {
         mRowsAdapter = new ArrayObjectAdapter();
@@ -148,8 +148,6 @@ Next lets fill out the class a little bit
         setBrandColor(getResources().getColor(R.color.primary));
         setBadgeDrawable(getResources().getDrawable(R.drawable.filmi));
     }
-
-You can also set the Android TV app icon programatically with `setBadgeDrawable`.
 
 All right onto the final step of this section, adding this fragment to the activity.
 
