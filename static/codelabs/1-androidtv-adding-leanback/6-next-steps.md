@@ -2,7 +2,7 @@
 
 ### The goal
 
-Adding images to the background like show in the screenshot on the right side. 
+Adding images to the background as shown in the screenshot on the right side. 
 
 <div layout vertical center>
   <img class="sample" src="img/detail_withandwithout_background_image.png" style="border: 1px solid #ccc; width: 100%;">
@@ -22,7 +22,7 @@ The Leanback library support developers in creating immersive TV experiences. Th
 
 ###Step 1 - Create BackgroundHelper
 
-<p>Create a class <code>BackgroundHelper<code>.</p>
+<p>Create a class <code>BackgroundHelper</code> which we are going to extend step by step to add functionality to change the background image for our TV activities..</p>
 
 	public class BackgroundHelper {
 		
@@ -49,6 +49,8 @@ The Leanback library support developers in creating immersive TV experiences. Th
 	}
 
 ###Step 2 - Add an inner class PicassoBackgroundManagerTarget
+
+The interface <a href="https://square.github.io/picasso/javadoc/com/squareup/picasso/Target.html">Target</a> of the Picasso library acts as a listener for the end of loading and manipulating images which is off the UI thread. We need a custom implementation of the <code>Target</code> set the resulting bitmap as a background image. Note that is important to have a proper implementation of <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#hashCode()"><code>hashCode</code></a> and <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object)"><code>equals</code></a> for every <code>Target</code> implementation.
 
     static class PicassoBackgroundManagerTarget implements Target {
         BackgroundManager mBackgroundManager;
@@ -95,11 +97,16 @@ The Leanback library support developers in creating immersive TV experiences. Th
 
 ###Step 3 - create a method <code>prepareBackgroundManager</code> to instantiate and prepare the <code>PicassoBackgroundManagerTarget</code>
 
+We attach the <a href="http://developer.android.com/reference/android/view/Window.html"><code>Window</code></a> of the current activity to the <code>BackgroundManager</code> and instantiate the <code>PicassoBackgroundManagerTarget</code>. Further a default color is set for the background and at last we get the metrics that describe the size and density of this display.
+
     public void prepareBackgroundManager() {
         BackgroundManager backgroundManager = BackgroundManager.getInstance(mActivity);
         backgroundManager.attach(mActivity.getWindow());
+		
         mBackgroundTarget = new PicassoBackgroundManagerTarget(backgroundManager);
-        mDefaultBackground = mActivity.getResources().getDrawable(R.drawable.default_background);
+        
+		mDefaultBackground = mActivity.getResources().getDrawable(R.drawable.default_background);
+		
         mMetrics = new DisplayMetrics();
         mActivity.getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
@@ -107,7 +114,7 @@ The Leanback library support developers in creating immersive TV experiences. Th
 
 ###Step 5 - add a method <code>updateBackground</code> to load an image
 
-We are using Picasso tp load and manipulate the image. Once done the instance of the PicassoBackgroundManagerTarget is used to apply the loaded image to the UI.
+We are using Picasso to load and manipulate the image. Once done the instance of the <code>PicassoBackgroundManagerTarget</code> is used to apply the loaded image to the UI. The method also makes sure to cancel the timer to make sure only one timer is running.
 
     protected void updateBackground(String url) {
         Picasso.with(mActivity)
@@ -117,6 +124,7 @@ We are using Picasso tp load and manipulate the image. Once done the instance of
                 .transform(BlurTransform.getInstance(mActivity))
                 .error(mDefaultBackground)
                 .into(mBackgroundTarget);
+				
         if (null != mBackgroundTimer) {
             mBackgroundTimer.cancel();
         }
@@ -124,7 +132,8 @@ We are using Picasso tp load and manipulate the image. Once done the instance of
 
 
 ###Step 6 - add an inner class <code>UpdateBackgroundTask</code>
-<p>This is a subclass of <code>TimerTask</code> to be used to delay updating the background.</p>
+
+This is a subclass of <code>TimerTask</code> to be used to delay updating the background.
 
     private class UpdateBackgroundTask extends TimerTask {
         @Override
@@ -142,7 +151,7 @@ We are using Picasso tp load and manipulate the image. Once done the instance of
 
 ###Step 7 - create the methods <code>startBackgroundTimer</code>
 
-<p>In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code>Timer</code> to update of the background.</p>
+In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code>Timer</code> to update of the background.
 
     public void startBackgroundTimer() {
         if (null != mBackgroundTimer) {
@@ -155,7 +164,7 @@ We are using Picasso tp load and manipulate the image. Once done the instance of
 
 ###Step 8 - Create the class <code>BlurTransform</code>
 
-<p>This is an implementation of the interface <code>com.squareup.picasso</code> which we use to blur the image to be set as background. We start with a auto-generated dummy implementations of the required methods <code>transform</code> and <code>key</code>.</p>
+<p>This is an implementation of the interface <a href="https://square.github.io/picasso/javadoc/com/squareup/picasso/Transformation.html"><code>com.squareup.picasso.Transformation</code></a> which we use to blur the image to be set as background. We start with auto-generated dummy implementations of the required methods <code>transform</code> and <code>key</code>.</p>
 
 	public class BlurTransform implements Transformation {
 	    @Override
@@ -171,7 +180,7 @@ We are using Picasso tp load and manipulate the image. Once done the instance of
 
 ###Step 9 - Make BlurTransformation a singleton
 
-We want the BlurTransformation to exists only once and make it a sinlgeton and instantiate a <code>RenderScript</code> in the private constructor which takes a <code>Context</code> as single argument.
+We want the BlurTransformation to exists only once and make it a <a href="http://en.wikipedia.org/wiki/Singleton_pattern">Sinlgeton</a> and instantiate a <code>RenderScript</code> in the private constructor which takes a <code>Context</code> as single argument.
 
 	RenderScript rs;
 	
@@ -281,5 +290,5 @@ and use it in the <code>onCreate</code> method.
 	bgHelper.prepareBackgroundManager();
 	bgHelper.updateBackground(selectedVideo.getThumbUrl());
 
-###Step 4 - Run app
+###Step 14 - Run app
 
