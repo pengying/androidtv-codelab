@@ -1,7 +1,5 @@
 <toc-element></toc-element>
 
-### The goal
-
 The Leanback library include classes for displaying additional information about a media item, such as a description or reviews, and for taking action on that item, such as purchasing it or playing its content. This lesson discusses how to create a presenter class for media item details, and how to extend the DetailsFragment class to implement a details view for a media item when it is selected by a user.
 
 In this step, you'll learn about:
@@ -11,6 +9,9 @@ In this step, you'll learn about:
 -   Displaying related videos in an row below the detail card.
 
 <b style="color: red">TBD: add screenshot of detail view with related content</b>
+<div layout vertical center>
+  <img class="sample" src="img/s4-card.png" style="border: 1px solid #ccc;">
+</div>
 
 ### Creating a new activity VideoDetailsActivity
 
@@ -58,8 +59,7 @@ android:exported=&quot;true&quot;&gt;
 The layout file of the <code>VideoDetailsActivity</code> references the <code>VideoDetailsFragment</code> which extends the <a href="https://developer.android.com/reference/android/support/v17/leanback/app/DetailsFragment.html">DetailsFragment</a>:
 The following example code demonstrates how to use the presenter class shown in the previous section, to add a preview image and actions for the media item being viewed. This example also shows the addition of a related media items row, which appears below the details listing.
 
-<code><pre>
-public class VideoDetailsFragment extends DetailsFragment {
+<code><pre>public class VideoDetailsFragment extends DetailsFragment {
     private Video selectedVideo;
     private static final int DETAIL_THUMB_WIDTH = 274;
     private static final int DETAIL_THUMB_HEIGHT = 274;
@@ -77,8 +77,7 @@ public class VideoDetailsFragment extends DetailsFragment {
         float density = ctx.getResources().getDisplayMetrics().density;
         return Math.round((float) dp * density);
     }
-}
-</pre></code>
+}</pre></code>
 
 
 ### Defining a Listener for Clicked Items
@@ -87,8 +86,7 @@ After you have implemented the DetailsFragment, modify your main media browsing 
 
 The following example shows how to implement a listener to start the details view when a user clicks a media item in the LeanbackBrowseFragment:
 
-<code><pre>
-public class LeanbackBrowseFragment extends BrowseFragment {
+<code><pre>public class LeanbackBrowseFragment extends BrowseFragment {
 ...
     public void init() {
     	...
@@ -96,13 +94,11 @@ public class LeanbackBrowseFragment extends BrowseFragment {
     	...
 	}
 ...
-}
-</pre></code>
+}</pre></code>
 
 and create the method <code>getDefaultItemViewClickerListener</code>:
 
-<code><pre>
-private OnItemViewClickedListener getDefaultItemViewClickedListener() {
+<code><pre>private OnItemViewClickedListener getDefaultItemViewClickedListener() {
 	return new OnItemViewClickedListener() {
         @Override
         public void onItemClicked(Presenter.ViewHolder viewHolder, Object o,
@@ -113,8 +109,7 @@ private OnItemViewClickedListener getDefaultItemViewClickedListener() {
     		startActivity(intent);
 		}
 	};
-}
-</pre></code>
+}</pre></code>
 
 <p>As we now pass the <code>Video</code> object with an <code>Intent</code> we need a key <code>LeanbackActivity.VIDEO</code> for it and make the data/Video class <code>Serializable</code>.</p>
 
@@ -123,8 +118,7 @@ private OnItemViewClickedListener getDefaultItemViewClickedListener() {
 
 In the media browsing framework provided by the leanback library, you use presenter objects to control the display of data on screen, including media item details. The framework provides the <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/AbstractDetailsDescriptionPresenter.html"><code>AbstractDetailsDescriptionPresenter</code></a> class for this purpose, which is a nearly complete implementation of the presenter for media item details. All you have to do is implement the onBindDescription() method to bind the view fields to your data objects, as shown in the following code sample:
 
-<code><pre>
-public class DetailsDescriptionPresenter
+<code><pre>public class DetailsDescriptionPresenter
 	extends AbstractDetailsDescriptionPresenter {
 	@Override
 	protected void onBindDescription(AbstractDetailsDescriptionPresenter.ViewHolder viewHolder,
@@ -136,14 +130,12 @@ public class DetailsDescriptionPresenter
 			viewHolder.getBody().setText(video.getDescription());
 		}
 	}
-}
-</pre></code>
+}</pre></code>
 
 ### Creating an Async task to load images
 
 To put the presenter in use, we have to make the <code>VideoDetailFragment</code> smarter. We add an inner class <code>DetailRowBuilderTask</code> to the fragment to load the images:
-<code><pre>
-private class DetailRowBuilderTask extends AsyncTask&lt;Video, Integer, DetailsOverviewRow&gt; {
+<code><pre>private class DetailRowBuilderTask extends AsyncTask&lt;Video, Integer, DetailsOverviewRow&gt; {
     @Override
     protected DetailsOverviewRow doInBackground(Video... videos) {
         DetailsOverviewRow row = new DetailsOverviewRow(videos[0]);
@@ -168,14 +160,12 @@ private class DetailRowBuilderTask extends AsyncTask&lt;Video, Integer, DetailsO
     protected void onPostExecute(DetailsOverviewRow detailRow) {
         // implemented in next step
     }
-}
-</pre></code>
+}</pre></code>
 
 ### Creating a Presenter when the task has finished executing
 
 The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and resizes the image off the UI thread. After it has completed we create the presenters in the <code>onPostExecute</code> method of the <code>AsyncTask</code> and set the adapter of the <code>DetailsFragment</code>
-<code><pre>
-@Override
+<code><pre>@Override
 protected void onPostExecute(DetailsOverviewRow detailRow) {
     ClassPresenterSelector ps = new ClassPresenterSelector();
     DetailsOverviewRowPresenter dorPresenter = new DetailsOverviewRowPresenter(
@@ -203,8 +193,7 @@ protected void onPostExecute(DetailsOverviewRow detailRow) {
     adapter.add(detailRow);
 	// finally we set the adapter of the DetailsFragment
     setAdapter(adapter);
-}
-</pre></code>
+}</pre></code>
 
 ### Executing the builder task to build the view
 
@@ -225,8 +214,7 @@ First, let's add an additional presenter:
 </pre></code>
 
 Accordingly the <code>ArrayObjectAdapter</code> requires an additional <code>ListRow</code> to be added. We create a new <code>ListRow</code> to which we pass a <code>HeaderItem</code> and a <code>CursorObjectAdapater</code> in the constructor.
-<code><pre>
-String subcategories[] = {
+<code><pre>String subcategories[] = {
 	You may also like"
 };
 CursorObjectAdapter rowAdapter = new CursorObjectAdapter(
@@ -235,7 +223,8 @@ VideoDataManager manager = new VideoDataManager(getActivity(),getLoaderManager()
 	VideoItemContract.VideoItem.buildDirUri(),rowAdapter);
 manager.startDataLoading();
 HeaderItem header = new HeaderItem(0, subcategories[0], null);
-adapter.add(new ListRow(header, rowAdapter));
-</pre></code>
+adapter.add(new ListRow(header, rowAdapter));</pre></code>
 
-### Running the app
+### Next up
+
+Creating recommendations that display on the home screen

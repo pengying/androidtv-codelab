@@ -136,4 +136,4 @@ In this step you've learned about:
 
 ### Next up
 
-Lets start creating the video browsing experience.
+Let's start creating the video browsing experience.
