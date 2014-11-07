@@ -33,7 +33,7 @@ This codelab uses **Android Studio**, an IDE for developing Android apps.
 
 The first thing we need to do is get the mobile app to build on.
 
-    git clone https://github.com/pengying/Android TV-codelab-app.git
+    git clone https://github.com/pengying/androidtv-codelab-app.git
 
 In the project directory open up `build.gradle` with Android Studio.
 
@@ -48,11 +48,8 @@ A brief overview of each of the components:
 * PlayerActivity - Video player
 * SlidingTabLayout, SlidingTabStrip, VideoItemFragment - UI for video browser
 * data/
-
   Video - Object storing video info
-
 * data/
-
   VideoContentProvider, AbstractVideoItemProvider, VideoItemContract, VideoDataManager - Mock local video database
 
 ### Running the starter project
@@ -75,7 +72,7 @@ Here's what it should look like.
   <img src="img/checkpoint_0_screenshot.png" alt="checkpoint_0 screenshot" width="300" class="noborder">
 </figure>
 
-Now lets see how it looks on Android TV.
+Now let's see how it looks on Android TV.
 
 ### ADB connect to Android TV
 
