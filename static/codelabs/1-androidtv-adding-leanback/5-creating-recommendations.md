@@ -114,8 +114,10 @@ Your app's recommendation service must run periodically in order to create curre
 
 <code><pre>public class BootCompleteReceiver extends BroadcastReceiver {
     private static final long INITIAL_DELAY = 5000;
+
     public BootCompleteReceiver() {
     }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().endsWith(Intent.ACTION_BOOT_COMPLETED)) {
@@ -123,14 +125,15 @@ Your app's recommendation service must run periodically in order to create curre
         }
     }
     private void scheduleRecommendationUpdate(Context context) {
+
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent recommendationIntent = new Intent(context, RecommendationsService.class);
         PendingIntent alarmIntent = PendingIntent.getService(context, 0, recommendationIntent, 0);
 
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-          INITIAL_DELAY,
-          AlarmManager.INTERVAL_HALF_HOUR,
-          alarmIntent);
+                INITIAL_DELAY,
+                AlarmManager.INTERVAL_HALF_HOUR,
+                alarmIntent);
     }
 }
 </pre></code>
