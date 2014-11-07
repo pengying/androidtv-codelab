@@ -175,7 +175,7 @@ Finally we set the `TextColor` of the ImageCardView to light gray.
 
 We define the data binding logic in `onBindViewHolder`.  We can cast the Object that's being passed in as our `Video` data then set the title text, subtext/content text, and image dimensions.  Finally we tell it to load the image with a thumbnail URL.
 
-\[Image representing views will go here\]
+<img src="img/image_view_card.png">
 
     @Override
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object o) {
@@ -218,7 +218,10 @@ Congrats!  You've completed this step.  Try running the App on Android TV.  You 
 When running the app from Android Studio, the standard launcher activity loads.  On Android TV back out to the home screen and start the app from Android TV to launch into the proper activity.
 </aside>
 
-\[Screencap of filmi\]
+<figure layout vertical center>
+  <img src="img/filmi_browse.png" alt="browse fragment" class="noborder" width="600px">
+</figure>
+
 
 ### Summary
 
