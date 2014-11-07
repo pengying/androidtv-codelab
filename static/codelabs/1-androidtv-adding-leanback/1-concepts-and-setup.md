@@ -131,7 +131,7 @@ And now the mobile app is running on Android TV.  It could use some TV UI love r
 In this step you've learned about:
 
 - Android TV and it's concepts
-- The codelab checkpoint_0 base
+- The codelab `checkpoint_0` base
 - How to connect to Android TV devices and deploy APKs
 
 ### Next up
