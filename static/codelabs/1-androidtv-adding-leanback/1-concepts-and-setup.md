@@ -40,13 +40,13 @@ Open the project directory and double click on the `build.gradle` file. Open it 
 Click OK on "Import Project from Gradle" screen without making any changes.
 
 <figure layout vertical center>
-  <img src="img/android-studio1.png" alt="Android Studio 1" class="noborder">
+  <img src="img/android-studio1.png" alt="Android Studio 1" class="noborder" width="500">
 </figure>
 
 Click on "Open Existing Project" on the next dialog.
 
 <figure layout vertical center>
-  <img src="img/android-studio2.png" alt="Android Studio 2" class="noborder">
+  <img src="img/android-studio2.png" alt="Android Studio 2" class="noborder" width="500">
 </figure>
 
 
@@ -66,7 +66,7 @@ A brief overview of each of the components:
   VideoContentProvider, AbstractVideoItemProvider, VideoItemContract, VideoDataManager - Mock local video database
 
 ### Running the starter project
-Lets run it on a phone.
+Let's run it on a phone.
 
 <div class="stepbystep">
 <ul>
@@ -99,7 +99,7 @@ Lets enable developer mode if it's not yet enabled.
 <li>Open <strong>Settings</strong></li>
 <li>Under preferences open <strong>Developer Options</strong></li>
 <aside class="callout">
-  If Developer Options doesn't display go into Device -> About, scroll down to **Build** and click **A** a few times until you receive the &quot;You're A Developer&quot; toast.  Then exit out of Settings and open Settings up again.
+  If Developer Options doesn't display go into Device -> About, scroll down to **Build** and click the build number a few times until you receive the &quot;You're A Developer&quot; toast.  Then exit out of Settings and open Settings up again.
 </aside>
 <li>Click <strong>Debugging</strong>.</li>
 <li>Change <strong>USB debugging</strong> to On</li>
