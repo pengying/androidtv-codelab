@@ -122,7 +122,7 @@ Lets run the app on Android TV.  In Android studio select checkpoint_0 and click
 And now the mobile app is running on Android TV.  It could use some TV UI love right?  In the next few steps we'll cover adding some Android TV UI to the existing data sources and video player.
 
 <figure layout vertical center>
-  <img src="img/checkpoint_0_androidTv_screencap.png" alt="Android TV screencap" width="600px">
+  <img src="img/checkpoint_0_androidtv_screencap.png" alt="Android TV screencap" width="600px">
 </figure>
 
 
@@ -131,7 +131,7 @@ And now the mobile app is running on Android TV.  It could use some TV UI love r
 In this step you've learned about:
 
 - Android TV and it's concepts
-- The codelab checkpoint_0 base
+- The codelab `checkpoint_0` base
 - How to connect to Android TV devices and deploy APKs
 
 ### Next up
