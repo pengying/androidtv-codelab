@@ -1,6 +1,8 @@
 <toc-element></toc-element>
 
-In this step, you'll learn how to use the classes provided by the leanback support library to implement a user interface for browsing videos from your app's media catalog.
+The Android framework provides classes for building user interfaces for these types of apps with the leanback support library. This library provides a framework of classes for creating an efficient and familiar interface for browsing and playing media files with minimal coding. The classes are designed be extended and customized so you can create an experience that is unique to your app.
+
+In this step, you'll learn how to use the classes provided by the leanback support library to implement a skeleton user interface for browsing videos from your app's media catalog.
 
 In this step, you'll learn about:
 
@@ -61,18 +63,57 @@ The following code snippet shows how to include this intent filter in your manif
 
 Caution: If you do not include the CATEGORY_LEANBACK_LAUNCHER intent filter in your app, it is not visible to users running the Google Play store on TV devices. Also, if your app does not have this filter when you load it onto a TV device using developer tools, the app does not appear in the TV user interface.
 
-### Create a Media Browse Layout
-
-The Android framework provides classes for building user interfaces for these types of apps with the v17 leanback support library. This library provides a framework of classes for creating an efficient and familiar interface for browsing and playing media files with minimal coding. The classes are designed be extended and customized so you can create an experience that is unique to your app.
-
 ### Creating LeanbackActivity
 
+Create leanback launcher activity. The activity should set the view to the activity_leanback layout that will include the BrowseFragment.
 
-### Displaying Media Lists
+<code><pre>public class LeanbackActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_leanback);
+    }
+}</code></pre>
 
+### Creating a Media Browse Layout
+
+The BrowseFragment class in the leanback library allows you to create a primary layout for browsing categories and rows of media items with a minimum of code.The following code from activity_leanback.xml shows how to create a layout that contains a BrowseFragment:
+
+<code><pre>&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id=&quot;@+id/main_frame&quot;
+  android:layout_width=&quot;match_parent&quot;
+  android:layout_height=&quot;match_parent&quot;
+  android:orientation=&quot;vertical&quot;
+  &gt;
+
+  &lt;fragment
+      android:name="com.android.example.leanback.fastlane.LeanbackBrowseFragment"
+      android:id=&quot;@+id/browse_fragment&quot;
+      android:layout_width=&quot;match_parent&quot;
+      android:layout_height=&quot;match_parent&quot;
+      /&gt;
+&lt;/FrameLayout&gt;</code></pre>
+
+### Extending the BrowseFragment
+
+Create class LeanbackBrowseFragment that extends BrowseFragment. Use the methods in this class to set display parameters such as the icon, title, brand color, and whether category headers are enabled.
+
+<code><pre>public class LeanbackBrowseFragment extends BrowseFragment {
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
+    }
+    public void init() {
+    	...
+        setBrandColor(getResources().getColor(R.color.primary));
+        setBadgeDrawable(getResources().getDrawable(R.drawable.filmi));
+        setHeadersState(BrowseFragment.HEADERS_ENABLED);
+    }
+}</code></pre>
 
 
 ### Next up
 
-Creating the video details activity
+Populating your browser interface with videos.
 

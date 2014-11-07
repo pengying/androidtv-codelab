@@ -1,6 +1,6 @@
 <toc-element></toc-element>
 
-In this step, you'll learn how to use the classes provided by the leanback support library to implement a user interface for browsing  videos from your app's media catalog.
+The BrowseFragment allows you to define and display browsable media content categories and media items from a media catalog using adapters and presenters. Adapters enable you to connect to local or online data sources that contain your media catalog information. Presenters hold data about media items and provide layout information for displaying an item on screen.
 
 In this step, you'll learn about:
 
