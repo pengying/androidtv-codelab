@@ -15,7 +15,7 @@ Think of each row as two pieces, a [`HeaderItem`](https://developer.android.com/
 
 The ArrayObjectAdapter is an array of the defined `ListRows` that aggregates the rows for the `BrowseFragment` view.
 
-Each of the items individual items displayed is an [`ImageCardView`](https://developer.android.com/reference/android/support/v17/leanback/widget/ImageCardView.html).  The zoom and additional detail affects are automatically handled by the Leanback library.
+We can store any sort of View in ListRows, but in our app we'll use the Leanback [`ImageCardView`](https://developer.android.com/reference/android/support/v17/leanback/widget/ImageCardView.html).  The zoom and additional detail affects are automatically handled by the Leanback library.
 
 To tie your video data and the `ImageCardView` together, we use a `Presenter`.  The `Presenter` defines which elements of the view are populated from which elements of the model.
 
