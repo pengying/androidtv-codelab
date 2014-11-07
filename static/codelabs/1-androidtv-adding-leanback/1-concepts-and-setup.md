@@ -35,7 +35,20 @@ The first thing we need to do is get the mobile app to build on.
 
     git clone https://github.com/pengying/androidtv-codelab-app.git
 
-In the project directory open up `build.gradle` with Android Studio.
+Open the project directory and double click on the `build.gradle` file. Open it with Android Studio.
+
+Click OK on "Import Project from Gradle" screen without making any changes.
+
+<figure layout vertical center>
+  <img src="img/android-studio1.png" alt="Android Studio 1" class="noborder">
+</figure>
+
+Click on "Open Existing Project" on the next dialog.
+
+<figure layout vertical center>
+  <img src="img/android-studio2.png" alt="Android Studio 2" class="noborder">
+</figure>
+
 
 ### Understanding the starter project
 All right, `checkpoint_0` is the base app that we'll be building upon. <img src="img/checkpoint_0.png">
