@@ -125,7 +125,7 @@ We'll leverage the Leanback [`BrowseFragment`](https://developer.android.com/ref
 
 
 <figure layout vertical center>
-  <img src="img/browse_fragment.png" alt="browse fragment" class="noborder" width="600px">
+  <img src="img/browse_fragment.png" alt="browse fragment" class="noborder">
 </figure>
 
 
