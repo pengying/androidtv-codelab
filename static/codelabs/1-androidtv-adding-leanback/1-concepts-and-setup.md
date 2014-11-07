@@ -2,17 +2,17 @@
 
 ### The goal
 
-In this codelab, you'll learn how to quickly enable a mobile app for AndroidTv using the Leanback library.  At the end of the codelab you can expect to have a UX compliant single apk for mobile devices and AndroidTv.
+In this codelab, you'll learn how to quickly enable a mobile app for Android TV using the Leanback library.  At the end of the codelab you can expect to have a UX compliant single apk for mobile devices and Android TV.
 
 ### Concepts
 
-To start off lets learn a little bit about AndroidTv.  What is AndroidTv and how is it different?  At it's core, it is Android so most of the things that you've learned developing your mobile app can be reused.  The key difference is input and the presentation of information.
+To start off lets learn a little bit about Android TV.  What is Android TV and how is it different?  At it's core, it is Android so most of the things that you've learned developing your mobile app can be reused.  The key difference is input and the presentation of information.
 
 <figure layout vertical center>
-  <img src="img/tv.png" alt="androidtv" class="noborder">
+  <img src="img/tv.png" alt="Android TV" class="noborder">
 </figure>
 
-AndroidTv is designed for the 10 foot experience.  Instead of a touchscreen, users will be navigating using a controller.  Instead of swiping the notification bar down, the notifications will be displayed as the top row of cards.  And the screen is always filled with rich visual content.
+Android TV is designed for the 10 foot experience.  Instead of a touchscreen, users will be navigating using a controller.  Instead of swiping the notification bar down, the notifications will be displayed as the top row of cards.  And the screen is always filled with rich visual content.
 
 In an effort to simplify integration for developers we created the Leanback library.  Leanback has fragments allow you to quickly and easily create rich animated experiences.  The core fragments we'll be working with are:
 * BrowseFragment - Browse through a video library
@@ -33,7 +33,7 @@ This codelab uses **Android Studio**, an IDE for developing Android apps.
 
 The first thing we need to do is get the mobile app to build on.
 
-    git clone https://github.com/pengying/androidtv-codelab-app.git
+    git clone https://github.com/pengying/Android TV-codelab-app.git
 
 In the project directory open up `build.gradle` with Android Studio.
 
@@ -75,13 +75,13 @@ Here's what it should look like.
   <img src="img/checkpoint_0_screenshot.png" alt="checkpoint_0 screenshot" width="300" class="noborder">
 </figure>
 
-Now lets see how it looks on AndroidTv.
+Now lets see how it looks on Android TV.
 
-### ADB connect to AndroidTv
+### ADB connect to Android TV
 
-First we need to connect to the AndroidTv device.  In order to that you can use a male to male USB cable or adb connect.  In this codelab we'll cover the adb connect method.
+First we need to connect to the Android TV device.  In order to that you can use a male to male USB cable or adb connect.  In this codelab we'll cover the adb connect method.
 
-#### On the AndroidTv
+#### On the Android TV
 
 Lets enable developer mode if it's not yet enabled.
 <div class="stepbystep">
@@ -115,14 +115,14 @@ Once you have the ip of the device, you can connect to it using adb connect in a
 
 Sweet we're now connected.
 
-### Run the app on AndroidTv
+### Run the app on Android TV
 
-Lets run the app on AndroidTv.  In Android studio select checkpoint_0 and click run again.  This time the AndroidTv device should apper in the list of running devices.  Select it and click ok.
+Lets run the app on Android TV.  In Android studio select checkpoint_0 and click run again.  This time the Android TV device should apper in the list of running devices.  Select it and click ok.
 
-And now the mobile app is running on AndroidTv.  It could use some TV UI love right?  In the next few steps we'll cover adding some AndroidTv UI to the existing data sources and video player.
+And now the mobile app is running on Android TV.  It could use some TV UI love right?  In the next few steps we'll cover adding some Android TV UI to the existing data sources and video player.
 
 <figure layout vertical center>
-  <img src="img/checkpoint_0_androidtv_screencap.png" alt="androidtv screencap" width="600px">
+  <img src="img/checkpoint_0_Android TV_screencap.png" alt="Android TV screencap" width="600px">
 </figure>
 
 
@@ -130,9 +130,9 @@ And now the mobile app is running on AndroidTv.  It could use some TV UI love ri
 
 In this step you've learned about:
 
-- AndroidTv and it's concepts
+- Android TV and it's concepts
 - The codelab checkpoint_0 base
-- How to connect to AndroidTv devices and deploy apks
+- How to connect to Android TV devices and deploy apks
 
 ### Next up
 
