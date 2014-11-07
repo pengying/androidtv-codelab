@@ -61,7 +61,7 @@ To the LeanbackActivity we need to add an intent filter.
 
 `android.intent.category.LEANBACK_LAUNCHER` tells Android TV to launch  `LeanbackActivity` when the application is run.
 
-We also add a theme, this theme's parent is HoloLight.NoActionBar to hide the action bar and has a primary color defined.
+We also add a theme.  In the next step we create a values-television directory and create a values specific to television
 
 <aside class="callout">
 <h4>Handling unsupported hardware features</h4>
@@ -105,6 +105,48 @@ Since certain features are not available on TV, you need to define their require
     <strong>android:required=&quot;false&quot;</strong>/&gt;
 </pre>
 </aside>
+
+### Create resource values for television
+
+We want to create some values that are specifically for Android TV.
+
+&rarr; Right click on the `res` directory and create a new Android resource directory.
+
+<img src="img/android_resource_directory.png" width="500px">
+
+&rarr; Create a new values resource directory add `UI mode` and select  `Television` as the qualifier.
+
+<img src="img/ui_mode_television.png" width="500px">
+
+&rarr; Right click on the `res` directory and create a new value resource file under the newly created values-television.  Name the resources file styles.xml.
+
+&rarr; Add the following styles which inherit from the `Leanback` theme to customize the look and feel.
+
+    <style name="AppTheme" parent="Theme.Leanback">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="imageCardViewStyle">@style/MyImageCardViewStyle</item>
+        <item name="headerStyle">@style/MyHeaderStyle</item>
+        <item name="rowHeaderStyle">@style/MyHeaderStyle</item>
+    </style>
+
+    <style name="MyImageCardViewStyle" parent="@style/Widget.Leanback.ImageCardViewStyle">
+        <item name="cardType">infoUnderWithExtra</item>
+        <item name="infoAreaBackground">@color/primary_dark</item>
+
+    </style>
+
+    <style name="MyHeaderStyle" parent="@style/Widget.Leanback.Header" >
+        <item name="android:textAppearance">@style/MyHeaderStyle.MyHeaderText</item>
+    </style>
+
+    <style name="MyHeaderStyle.MyHeaderText" parent="TextAppearance.Leanback.Header">
+        <item name="android:textSize">@dimen/lb_browse_header_text_size</item>
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 ### Add an Android TV app banner
 
