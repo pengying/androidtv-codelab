@@ -2,33 +2,29 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>Google I/O 2014 CodeLabs</title>
+  <title>Android TV Codelabs</title>
   <link rel="stylesheet" href="/static/css/app.css">
   <link rel="stylesheet" href="/static/css/shadowdom-shim.css" shim-shadowdom>
-  <link rel="stylesheet" href="/static/css/landing.css">
   <script src="/static/bower_components/platform/platform.js"></script>
   <link rel="import" href="/static/vulcanized.html">
 </head>
 <body unresolved>
-<template is="auto-binding" id="t">
-  <core-header-panel mode="waterfall">
-    <div class="core-header">
-      <div class="core-header-logo" layout horizontal center>
-        <a href="/" layout horizontal center>
-          <img src="/static/images/polymer-logo-outline.png">
-          <h2>Polytechnic</h2>
-        </a>
-      </div>
-      <h2>codelabs</h2>
-      <codelist-dropdown
-          codelabs="{{codelabs}}"
-          on-codelab-list="{{onResponse}}">
-      </codelist-dropdown>
+
+<core-header-panel mode="waterfall">
+  <div class="core-header">
+    <div class="core-header-logo" layout horizontal center>
+      <a href="/" layout horizontal center>
+        <img src="/static/images/android_5_lollipop.png">
+        <h2>Android TV</h2>
+      </a>
     </div>
+    <h2>codelabs</h2>
+    <codelist-dropdown></codelist-dropdown>
+  </div>
     <div id="maincontent">
       <div class="splash-content">
         <h2>Congratulations, you've completed your codelab!</h2>
-        <div class="button-wrapper">
+        <!--<div class="button-wrapper">
           <paper-button raised on-tap="{{goToCodelabList}}" id="button-codelab">
             <core-icon icon="forward"></core-icon>
             <span>Start another codelab</span>
@@ -49,11 +45,11 @@
             <span>Share</span>
           </paper-button>
         </div>
-      </div>
+      </div>-->
     </div>
   </core-header-panel>
 </template>
-
+<!--
 <script async defer src="//apis.google.com/js/platform.js"></script>
 <script async defer src="//platform.twitter.com/widgets.js"></script>
 <script>
@@ -83,6 +79,7 @@
     };
   });
 })();
-</script>
+</script>-->
+<script src="/static/codelabs/common.js"></script>
 </body>
 </html>
