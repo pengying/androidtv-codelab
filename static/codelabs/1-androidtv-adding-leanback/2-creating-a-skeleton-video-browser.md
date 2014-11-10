@@ -8,7 +8,7 @@ In this step we'll put up the framework for the video browser fragment.  The key
 
 Lets get started.
 
-### Adding Leanback dependencies
+### Add Leanback dependencies
 
 We'll need to add a few dependencies to the build.grade file before we can begin.
 
@@ -34,7 +34,7 @@ Under `fastlane` right click to create a new `Blank Activity` called `LeanbackAc
 
 <img src="img/create_leanback_activity.png">
 
-Once the class is created, delete the `menu/menu_leanback.xml` resource since it won't be used.  In the LeanbackActivity class, delete the `onCreateOptionsMenu` and `onOptionsItemSelected` functions.
+Once the class is created, delete the `menu/menu_leanback.xml` resource since it won't be used.  In the `LeanbackActivity` class, delete the `onCreateOptionsMenu` and `onOptionsItemSelected` functions.
 
 ### Declare launcher activity for Android TV
 
@@ -104,6 +104,17 @@ Since certain features are not available on TV, you need to define their require
 </pre>
 </aside>
 
+### Add an Android TV app banner
+
+In the manifest, add `android:banner` under the application element to define the app banner.  The banner is the app launch point that appears on the home screen in the apps and games rows.
+
+<pre>
+&lt;application
+    android:allowBackup=&quot;true&quot;
+    android:icon=&quot;@drawable/ic_launcher&quot;
+    <strong>android:banner=&quot;@drawable/filmi_banner&quot;</strong>
+</pre>
+
 ### Create resource values for television
 
 We want to create some values that are specifically for Android TV.
@@ -116,7 +127,8 @@ We want to create some values that are specifically for Android TV.
 
 <img src="img/ui_mode_television.png" width="500px">
 
-&rarr; Right click on the `res` directory and create a new value resource file under the newly created values-television.  Name the resources file styles.xml.
+&rarr; Right click on the `res` directory and create a new value resource file under the newly
+created `values-television`.  Name the resources file styles.xml.
 
 &rarr; Add the following styles which inherit from the `Leanback` theme to customize the look and feel.
 
@@ -146,28 +158,17 @@ We want to create some values that are specifically for Android TV.
         <item name="android:textStyle">bold</item>
     </style>
 
-### Add an Android TV app banner
-
-In the manifest, add `android:banner` under the application element to define the app banner.  The banner is the app launch point that appears on the home screen in the apps and games rows.
-
-<pre>
-&lt;application
-    android:allowBackup=&quot;true&quot;
-    android:icon=&quot;@drawable/ic_launcher&quot;
-    <strong>android:banner=&quot;@drawable/filmi_banner&quot;</strong>
-</pre>
-
 We've included Leanback libraries, and now Android TV will launch into the correct activity.  Lets create the video browser.
 
 ### Create a fragment that extends BrowseFragment
 
-We'll leverage the Leanback [`BrowseFragment`](https://developer.android.com/reference/android/support/v17/leanback/app/BrowseFragment.html).  The BrowseFragment class in the leanback library allows you to create a primary layout for browsing categories and rows of media items with a minimum of code.
+We'll leverage the Leanback [`BrowseFragment`](https://developer.android
+.com/reference/android/support/v17/leanback/app/BrowseFragment.html).  The `BrowseFragment` class in the Leanback library allows you to create a primary layout for browsing categories and rows of media
+ items with a minimum amount of code.
 
 <figure layout vertical center>
   <img src="img/browse_fragment.png" alt="browse fragment" class="noborder">
 </figure>
-
-
 
 The first step is to create a class that extends BrowseFragment.
 
@@ -187,6 +188,14 @@ Next lets fill out the class a little bit
 
         setBrandColor(getResources().getColor(R.color.primary));
         setBadgeDrawable(getResources().getDrawable(R.drawable.filmi));
+    }
+
+&rarr; Override the `onViewCreated` method and call `init`.
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
     }
 
 All right onto the final step of this section, adding this fragment to the activity.

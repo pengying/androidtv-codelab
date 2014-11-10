@@ -2,7 +2,8 @@ title: "Android TV: Adding Leanback to your app"
 summary: "In this codelab we'll learn how to quickly convert an existing mobile web app
 into a fluid 10 foot experience by leveraging the Leanback fragments."
 
-description: "This codelab will introduce you to the key Android TV concepts and the Leanback fragments.  We will then walk through adding Android TV functionality to an existing mobile video app using Leanback fragments."
+description: "This codelab will introduce you to the key Android TV concepts and the Leanback fragments.  We will then walk through adding Android TV functionality to an existing mobile video app using Leanback fragments.  By the end of the codelab, you'll have a
+single APK that you can use on both mobile and Android TV."
 
 prerequisites:
   - Understanding of Android
@@ -11,7 +12,7 @@ level: Intermediate
 logo: p-logo-square.png
 categories:
   - AndroidTv
-duration: 120 min
+duration: 240 min
 keywords:
   - Android TV
   - Leanback
@@ -27,13 +28,13 @@ steps:
      of the video browser activity."
   -
     title: "Loading content into the video browser fragment."
-    blurb: "In this step, We'll cover a few more concepts and finish creating the video browser."
+    blurb: "We'll cover a few more concepts and finish creating the video browser."
   -
     title: "Creating the video details activity"
-    blurb: "We'll extend Leanback video details fragment to show the details of a video."
+    blurb: "We'll extend the Leanback video details fragment to show the details of a video."
   -
-    title: "Creating recommendations that display on the home screen"
-    blurb: "Now we'll cover creating the recommendations that display on Android TV's home screen."
+    title: "Creating recommendations to display on Android TV home screen"
+    blurb: "We'll cover creating the recommendations that display on Android TV's home screen."
   -
     title: "Polishing the animations"
     blurb: "Finally, we'll update the background when browsing videos to add a bit more polish."

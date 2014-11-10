@@ -1,7 +1,5 @@
 <toc-element></toc-element>
 
-### The goal
-
 In this codelab, you'll learn how to quickly enable a mobile app for Android TV using the Leanback library.  At the end of the codelab you can expect to have a UX compliant single apk for mobile devices and Android TV.
 
 ### Concepts
@@ -12,14 +10,18 @@ To start off lets learn a little bit about Android TV.  What is Android TV and h
   <img src="img/tv.png" alt="Android TV" class="noborder">
 </figure>
 
-Android TV is designed for the 10 foot experience.  Instead of a touchscreen, users will be navigating using a controller.  Instead of swiping the notification bar down, the notifications will be displayed as the top row of cards.  And the screen is always filled with rich visual content.
+Android TV is designed for the 10 foot experience.  Instead of a touchscreen, users will be navigating using a controller.  Instead of swiping the notification bar down, the notifications will be displayed as the top row of cards.  And, the screen is always filled with
+rich visual content.
 
-In an effort to simplify integration for developers we created the Leanback library.  Leanback has fragments allow you to quickly and easily create rich animated experiences.  The core fragments we'll be working with are:
+In an effort to simplify integration for developers we created the Leanback library.  Leanback has extendable fragments to allow you to quickly and easily create rich animated experiences.  The core fragments we'll be working with are:
+
 * BrowseFragment - Browse through a video library
 * DetailsFragment - Display the details of a specific video
 * PlaybackOverlayFragment - Control video playback
 
-These fragments use the Model View Presenter pattern.  You'll bind your data model to the view using Presenter classes.
+These fragments use the [Model View Presenter](http://en.wikipedia
+.org/wiki/Model%E2%80%93view%E2%80%93presenter) pattern.  You'll bind your data model to the view
+using presenter classes.
 
 There's a lot of ground to cover, so let's get started!
 
@@ -53,7 +55,9 @@ Click on "Open Existing Project" on the next dialog.
 ### Understanding the starter project
 All right, `checkpoint_0` is the base app that we'll be building upon. <img src="img/checkpoint_0.png">
 
-Each of the following checkpoints can be used as reference points to check your work or for help if you encounter any issues.
+Each of the following checkpoints can be used as reference points to check your work or for help
+if you encounter any issues.  The checkpoint number corresponds with the codelab step - 1.  (0 vs
+ 1 indexing)
 
 A brief overview of each of the components:
 
@@ -99,7 +103,7 @@ Lets enable developer mode if it's not yet enabled.
 <li>Open <strong>Settings</strong></li>
 <li>Under preferences open <strong>Developer Options</strong></li>
 <aside class="callout">
-  If Developer Options doesn't display go into Device -> About, scroll down to **Build** and click the build number a few times until you receive the &quot;You're A Developer&quot; toast.  Then exit out of Settings and open Settings up again.
+  If `Developer Options` doesn't display go into `Device` -> `About`, scroll down to **Build** and click the build number a few times until you receive the &quot;You're A Developer&quot; toast.  Then exit out of `Settings` and open `Settings` up again.
 </aside>
 <li>Click <strong>Debugging</strong>.</li>
 <li>Change <strong>USB debugging</strong> to On</li>
@@ -127,7 +131,7 @@ Sweet, we're now connected!
 
 ### Run the app on Android TV
 
-Lets run the app on Android TV.  In Android studio select checkpoint_0 and click run again.  This time the Android TV device should apper in the list of running devices.  Select it and click ok.
+Lets run the app on Android TV.  In Android studio select `checkpoint_0` and click run again.  This time the Android TV device should appear in the list of running devices.  Select it and click ok.
 
 And now the mobile app is running on Android TV.  It could use some TV UI love right?  In the next few steps we'll cover adding some Android TV UI to the existing data sources and video player.
 

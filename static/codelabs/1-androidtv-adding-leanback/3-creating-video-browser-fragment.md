@@ -5,7 +5,7 @@ In this step we'll learn about how the Leanback `BrowseFragment` works and put s
 Let's get started.
 
 ### Concepts
-First, let's cover how the `BrowseFragment` works.  The `BrowseFragment` is basically a View that renders rows of data that you provide.
+First, let's cover how the `BrowseFragment` works.  The `BrowseFragment` basically renders rows of data that you provide.
 
 <figure layout vertical center>
   <img src="img/browse_fragment_model.png" alt="browse fragment" class="noborder" width="600px">
@@ -53,14 +53,16 @@ We need to create a presenter to tie our `Video` model to the `ImageCardView`.
 
 ### Create a Picasso Target to handle image loading
 
-We're leveraging [Picasso](http://square.github.io/picasso/), an open source library that simplifies image loading, caching, and resizing.
+We're leveraging [`Picasso`](http://square.github.io/picasso/), an open source library that
+simplifies image loading, caching, and resizing.
 
 <aside class="callout">
-The base sample app already uses Picasso so this should be done for you.  But if you want to add it in a separate app, in your build.gradle file add the following dependency.
+The base sample app already uses `Picasso` so this should be done for you.  But if you want to add
+ it in a separate app, in your build.gradle file add the following dependency.
     <pre>compile 'com.squareup.picasso:picasso:2.3.4'</pre>
 </aside>
 
-&rarr; Create an inner static class PiccasoImageCardViewTarget implementing com.squareup.picasso.Target and click on control I to implement the methods: onBitmapLoaded, onBitmapFailed and onPrepareLoad methods.
+&rarr; Create an inner static class `PiccasoImageCardViewTarget` implementing `com.squareup.picasso.Target` and implement the methods: `onBitmapLoaded`, `onBitmapFailed` and `onPrepareLoad`.
 
     static class PicassoImageCardViewTarget implements Target {
 
@@ -80,7 +82,8 @@ The base sample app already uses Picasso so this should be done for you.  But if
       }
     }
 
-&rarr; To this class we'll add an instance variable to store the `ImageCardView` we'll draw into once the bitmap is loaded.
+&rarr; To this class we'll add a variable to store the `ImageCardView` we'll draw into once the
+bitmap is loaded.
 
     private ImageCardView mImageCardView;
 
@@ -101,9 +104,11 @@ The base sample app already uses Picasso so this should be done for you.  But if
 
 ### Create ViewHolder class
 
-We'll use the `ViewHolder` pattern to store all of the data associated with the view.
+We'll use a `ViewHolder` to store all of the data associated with the view.
 
-&rarr; Create an inner static class that extends `Presenter.ViewHolder` and create the default constructor.
+&rarr; As a child of `CardPresenter`, create an inner static class that extends `Presenter
+.ViewHolder`
+and create the default constructor.
 
     static class ViewHolder extends Presenter.ViewHolder {
 
@@ -135,7 +140,7 @@ We'll use the `ViewHolder` pattern to store all of the data associated with the 
         return mCardView;
     }
 
-&rarr; Create a function that loads the image from a URL.
+&rarr; Create a function that loads the image from a String URL.
 
     protected void updateCardViewImage(String url) {
 
@@ -151,7 +156,8 @@ Now lets create the `ImageCardView` to hold and bind it with some data from the 
 
 ### Creating the ImageCardView
 
-`onCreateViewHolder` is called to create a new view. In it we'll handle the logic of storing the context, and creating a new ImageCardView.
+`onCreateViewHolder` is called to create a new view. In it we'll handle the logic of storing the
+context, and creating a new `ImageCardView`.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup) {
@@ -165,7 +171,13 @@ Now lets create the `ImageCardView` to hold and bind it with some data from the 
         return new ViewHolder(cardView);
     }
 
-We set the cardView `Focusable` and `FocusableInTouchMode` to true to enable it to be selected when browsing through the rows of content.
+<aside class="callout">
+We set the cardView `Focusable` and `FocusableInTouchMode` to true to enable
+it to be
+selected
+when browsing through the rows of content.  It's important to remember to set these fields to
+true when implementing Android TV for your app
+</aside>
 
 Finally we set the `TextColor` of the ImageCardView to light gray.
 
@@ -180,15 +192,15 @@ We define the data binding logic in `onBindViewHolder`.  We can cast the Object 
         Video video = (Video) o;
         ((ViewHolder) viewHolder).mCardView.setTitleText(video.getTitle());
         ((ViewHolder) viewHolder).mCardView.setContentText(video.getDescription());
-        ((ViewHolder) viewHolder).mCardView.setMainImageDimensions(CARD_WIDTH * 2, CARD_HEIGHT * 2);
+        ((ViewHolder) viewHolder).mCardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
         ((ViewHolder) viewHolder).updateCardViewImage(video.getThumbUrl());
     }
 
-Make sure to include the Video class:
+Make sure to include the `Video` class:
 
     import com.android.example.leanback.data.Video;
 
-And our CardPresenter is complete.  Lets fill out some ListRows with our video content.
+And our `CardPresenter` is complete.  Lets fill out some `ListRows` with our video content.
 
 ### Populating the videos
 
