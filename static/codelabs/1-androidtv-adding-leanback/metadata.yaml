@@ -36,4 +36,4 @@ steps:
     blurb: "Now we'll cover creating the recommendations that display on Android TV's home screen."
   -
     title: "Polishing the animations"
-    blurb: "Finally, we'll add a little more detail to the animations by modifying and get the whole app running."
+    blurb: "Finally, we'll update the background when browsing videos to add a bit more polish."

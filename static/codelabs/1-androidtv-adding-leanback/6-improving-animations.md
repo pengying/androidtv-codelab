@@ -1,16 +1,13 @@
 <toc-element></toc-element>
 
-### The goal
+We want to specify the background image as a user browses from item to item in the `BrowseFragment`
 
-Adding images to the background as shown in the screenshot on the right side. 
-
-<div layout vertical center>
-  <img class="sample" src="img/detail_withandwithout_background_image.png" style="border: 1px solid #ccc; width: 100%;">
-</div>
+<figure layout vertical center>
+  <img class="sample" src="img/detail_withandwithout_background_image.png" style="border: 1px
+  solid #ccc;" width="600px">
+</figure>
 
 The Leanback library support developers in creating immersive TV experiences. This includes using large pictures in the background to improve the experience. In this step you will learn how to use the <a href="https://developer.android.com/reference/android/support/v17/leanback/app/BackgroundManager.html">BackgroundManager</a> to change the background of the user interface according to the selection of the video in the UI. The BackgroundManager supports background image continuity between multiple Activities. It should be noted that the BackgroundManager holds references to potentially large bitmap Drawables. Call <a href="http://developer.android.com/reference/android/support/v17/leanback/app/BackgroundManager.html#release()"><code>release</code></a> to release these references when the Activity is not visible.
-
-
 
 ###Concepts
 
@@ -22,7 +19,7 @@ The Leanback library support developers in creating immersive TV experiences. Th
 
 ### Create BackgroundHelper
 
-<p>Create a class <code>BackgroundHelper</code> which we are going to extend step by step to add functionality to change the background image for our TV activities..</p>
+Under `fastlane` Create a class <code>BackgroundHelper</code> which we are going to extend step by step to add functionality to change the background image for our TV activities.
 
 	public class BackgroundHelper {
 		

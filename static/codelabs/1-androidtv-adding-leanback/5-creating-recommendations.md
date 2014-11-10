@@ -214,6 +214,8 @@ This implementation of the BroadcastReceiver class must run after start up of th
   For more information, see <code><a href="/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED">ACTION_BOOT_COMPLETED</a></code>.
 </aside>
 
+Congrats, you've completed adding recommendations for your app.  Try running it and you should start seeing recommendations after 30 minutes.
+
 ### Summary
 
 In this step you've learned about:
@@ -223,5 +225,5 @@ In this step you've learned about:
 
 ### Next up
 
-Polishing animations and transitions.
+Adding polish animations and transitions.
 
