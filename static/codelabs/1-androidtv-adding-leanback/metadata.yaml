@@ -26,11 +26,11 @@ steps:
     blurb: "We'll cover the concepts of the Leanback BrowseFragment and create the skeleton
      of the video browser activity."
   -
-    title: "Loading content on your video browser fragment."
+    title: "Loading content into the video browser fragment."
     blurb: "In this step, We'll cover a few more concepts and finish creating the video browser."
   -
     title: "Creating the video details activity"
-    blurb: "We'll extend Leanback video details fragment to create a view to show the details of a video."
+    blurb: "We'll extend Leanback video details fragment to show the details of a video."
   -
     title: "Creating recommendations that display on the home screen"
     blurb: "Now we'll cover creating the recommendations that display on Android TV's home screen."
