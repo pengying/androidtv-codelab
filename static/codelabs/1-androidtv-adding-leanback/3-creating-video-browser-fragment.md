@@ -154,7 +154,7 @@ and create the default constructor.
 
 Now lets create the `ImageCardView` to hold and bind it with some data from the model.
 
-### Creating the ImageCardView
+### Create the ImageCardView
 
 `onCreateViewHolder` is called to create a new view. In it we'll handle the logic of storing the
 context, and creating a new `ImageCardView`.
@@ -181,7 +181,7 @@ true when implementing Android TV for your app
 
 Finally we set the `TextColor` of the ImageCardView to light gray.
 
-### Binding data to the ViewHolder
+### Bind data to the ViewHolder
 
 We define the data binding logic in `onBindViewHolder`.  We can cast the Object that's being passed in as our `Video` data then set the title text, subtext/content text, and image dimensions.  Finally we tell it to load the image with a thumbnail URL.
 
@@ -202,7 +202,7 @@ Make sure to include the `Video` class:
 
 And our `CardPresenter` is complete.  Lets fill out some `ListRows` with our video content.
 
-### Populating the videos
+### Populate the videos
 
 In the `LeanbackBrowseFragment` let's create some sample categories.  Here we're defining them as constants, but in a real app you would probably pull them from your database.
 
@@ -234,21 +234,46 @@ In each row, we'll create an ObjectAdapter to define how to render the content t
         }
     }
 
-Edit the class: data.VideoDataManager to add ObjectAdapter as fourth parameter to VideoDataManager constructor:
+### Update VideoDataManager to use CursorObjectAdapter
+
+Here, we'll update our VideoDataManager to manage the cursor for our ObjectAdapter.
+
+In `data/VideoDataManager add an ObjectAdapter to the class `VideoDataManager`.
+
+    private ObjectAdapter mItemList;
+
+Next, add ObjectAdapter as fourth parameter to VideoDataManager
+constructor and store the ObjectAdapter as mItemList.
 
     public VideoDataManager(Context mContext, LoaderManager mLoaderManager, Uri mRowUri, ObjectAdapter rowContents) {
         mItemList = rowContents;
         ....
     }
 
-Also add a private ObjectAdapter to the class VideoDataManager:
-
-    private ObjectAdapter mItemList;
-
-And create the method:
+Create the a getter for the ObjectAdapter.
 
     public ObjectAdapter getItemList() {
         return mItemList;
+    }
+
+Update `VideoItemMapper` to extend `CursorMapper`
+
+    public static class VideoItemMapper extends CursorMapper {
+
+Update `onLoadFinished` to set the cursor for `mItemList`.
+
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        if (mItemList instanceof CursorObjectAdapter) {
+            ((CursorObjectAdapter) mItemList).swapCursor(cursor);
+        }
+    }
+
+Fill in `onLoaderReset` to set the `Cursor` as null
+
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        if (mItemList instanceof CursorObjectAdapter) {
+            ((CursorObjectAdapter) mItemList).swapCursor(null);
+        }
     }
 
 
