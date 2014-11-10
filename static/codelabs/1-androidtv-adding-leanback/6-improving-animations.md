@@ -20,7 +20,7 @@ The Leanback library support developers in creating immersive TV experiences. Th
 - Implementing a Picasso <a href="https://square.github.io/picasso/javadoc/com/squareup/picasso/Target.html">Target</a>
 
 
-###Create BackgroundHelper
+### Create BackgroundHelper
 
 <p>Create a class <code>BackgroundHelper</code> which we are going to extend step by step to add functionality to change the background image for our TV activities..</p>
 
@@ -48,7 +48,7 @@ The Leanback library support developers in creating immersive TV experiences. Th
 	    }
 	}
 
-###Step 2 - Add an inner class PicassoBackgroundManagerTarget
+### Add an inner class PicassoBackgroundManagerTarget
 
 The interface <a href="https://square.github.io/picasso/javadoc/com/squareup/picasso/Target.html">Target</a> of the Picasso library acts as a listener for the end of loading and manipulating images which is off the UI thread. We need a custom implementation of the <code>Target</code> set the resulting bitmap as a background image. Note that is important to have a proper implementation of <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#hashCode()"><code>hashCode</code></a> and <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html#equals(java.lang.Object)"><code>equals</code></a> for every <code>Target</code> implementation.
 
@@ -95,7 +95,7 @@ The interface <a href="https://square.github.io/picasso/javadoc/com/squareup/pic
         }
     }
 
-###Step 3 - create a method <code>prepareBackgroundManager</code> to instantiate and prepare the <code>PicassoBackgroundManagerTarget</code>
+### Create a method <code>prepareBackgroundManager</code> to instantiate and prepare the <code>PicassoBackgroundManagerTarget</code>
 
 We attach the <a href="http://developer.android.com/reference/android/view/Window.html"><code>Window</code></a> of the current activity to the <code>BackgroundManager</code> and instantiate the <code>PicassoBackgroundManagerTarget</code>. Further a default color is set for the background and at last we get the metrics that describe the size and density of this display.
 
@@ -112,7 +112,7 @@ We attach the <a href="http://developer.android.com/reference/android/view/Windo
     }
 
 
-###Step 5 - add a method <code>updateBackground</code> to load an image
+### Add a method <code>updateBackground</code> to load an image
 
 We are using Picasso to load and manipulate the image. Once done the instance of the <code>PicassoBackgroundManagerTarget</code> is used to apply the loaded image to the UI. The method also makes sure to cancel the timer to make sure only one timer is running.
 
@@ -131,7 +131,7 @@ We are using Picasso to load and manipulate the image. Once done the instance of
     }
 
 
-###Step 6 - add an inner class <code>UpdateBackgroundTask</code>
+### Add an inner class <code>UpdateBackgroundTask</code>
 
 This is a subclass of <code>TimerTask</code> to be used to delay updating the background.
 
@@ -149,7 +149,7 @@ This is a subclass of <code>TimerTask</code> to be used to delay updating the ba
         }
     }
 
-###Step 7 - create the methods <code>startBackgroundTimer</code>
+### Create the methods <code>startBackgroundTimer</code>
 
 In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code>Timer</code> to update of the background.
 
@@ -162,7 +162,7 @@ In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code
     }
 
 
-###Step 8 - Create the class <code>BlurTransform</code>
+### Create the class <code>BlurTransform</code>
 
 <p>This is an implementation of the interface <a href="https://square.github.io/picasso/javadoc/com/squareup/picasso/Transformation.html"><code>com.squareup.picasso.Transformation</code></a> which we use to blur the image to be set as background. We start with auto-generated dummy implementations of the required methods <code>transform</code> and <code>key</code>.</p>
 
@@ -178,7 +178,7 @@ In this method the <code>UpdateBackgroundTask</code> is used to schedule a <code
 	    }
 	}
 
-###Step 9 - Make BlurTransformation a singleton
+### Make BlurTransformation a singleton
 
 We want the BlurTransformation to exists only once and make it a <a href="http://en.wikipedia.org/wiki/Singleton_pattern">Sinlgeton</a> and instantiate a <code>RenderScript</code> in the private constructor which takes a <code>Context</code> as single argument.
 
@@ -202,11 +202,11 @@ We want the BlurTransformation to exists only once and make it a <a href="http:/
         return blurTransform;
     }
 
-###Step 10 - Implement the transform and key method
+### Implement the transform and key method
 
 The meat of this class is in the <code>transform</code> method which does the trick of blurring the image.
 
-	@Override
+	  @Override
     public Bitmap transform(Bitmap bitmap) {
         // Create another bitmap that will hold the results of the filter.
         Bitmap blurredBitmap = Bitmap.createBitmap(bitmap);
@@ -238,14 +238,14 @@ The meat of this class is in the <code>transform</code> method which does the tr
         return "blur";
     }
 
-###Step 11 - apply the transformation
+### Apply the transformation
 
 We complete the fluid calls to the Picasso library in the <code>updateBackground</code> method after the <code>centerCrop</code> call. Its pretty simple now.
 
 	.transform(BlurTransform.getInstance(mActivity))
 
 
-###Step 12 - Add background helper to LeanbackBrowseFragment
+### Add background helper to LeanbackBrowseFragment
 
 These classes are not used anywhere by now. We add it first to the <code>LeanbackBrowseFragment</code>. Add a member variable <code>bgHelper</code>.
 
@@ -276,7 +276,7 @@ Now we just register the listener in the <code>init</code> method.
 
 	setOnItemViewSelectedListener(getDefaultItemSelectedListener());
 
-###Step 13 - Add background helper to the <code>VideoDetailsFragment</code>
+### Add background helper to the <code>VideoDetailsFragment</code>
 
 The background should also be set when the details of a video is shown. So we apply this in the <code>VideoDetailsFragment</code> as well. It simpler here because we don't require a listener. It's just added to the <code>onCrreate</code> method of the fragment.
 
@@ -290,5 +290,7 @@ and use it in the <code>onCreate</code> method.
 	bgHelper.prepareBackgroundManager();
 	bgHelper.updateBackground(selectedVideo.getThumbUrl());
 
-###Step 14 - Run app
+### Run the app
 
+Congrats, you've completed the codelab!  We have some bonus content on leveraging the
+PlaybackOverlayFragment to easily playback controls in step 7 if you have time.
