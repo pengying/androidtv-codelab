@@ -34,8 +34,60 @@ Content recommendations are created with background processing. In order for you
     private NotificationManager mNotificationManager;
 
 &rarr; Next override the onHandleIntent function.  As an example recommendation service, we'll
-use the same video selections as the browse fragment.
+use the same video selections as the browse fragment.  We store a `ContentProviderClient`, then
+create a `Cursor` from the client.
 
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        ContentProviderClient client = getContentResolver().acquireContentProviderClient(VideoItemContract.VideoItem.buildDirUri());
+        try {
+            Cursor cursor = client.query(VideoItemContract.VideoItem.buildDirUri(), VideoDataManager.PROJECTION, null, null, VideoItemContract.VideoItem.DEFAULT_SORT);
+
+&rarr; Instantiate a `VideoItemMapper` that we've defined in `VideoDataManager` and map it to
+cursor with `bindColumns`.
+
+    VideoDataManager.VideoItemMapper mapper = new VideoDataManager.VideoItemMapper();
+          mapper.bindColumns(cursor);
+
+&rarr;  Instantiate a NotificationManager.
+
+    mNotificationManager = (NotificationManager) getApplicationContext()
+          .getSystemService(Context.NOTIFICATION_SERVICE);
+
+&rarr; Create a counter for the iteration to create recommendations up to `MAX_RECOMMENDATIONS`.
+
+    int count = 1;
+
+&rarr; Loop through the cursor until we're out of recommendations or we've hit our max and create
+ pending intents for each.  The pending intents will direct the user to the details view of the
+ video.
+
+    while (cursor.moveToNext() && count <= MAX_RECOMMENDATIONS) {
+        Video video = mapper.bind(cursor);
+        PendingIntent pendingIntent = buildPendingIntent(video);
+        Bundle extras = new Bundle();
+        extras.putString(EXTRA_BACKGROUND_IMAGE_URL, video.getThumbUrl());
+        count++;
+    }
+
+&rarr; Create a utility function to create the `PendingIntent` from `Video`.
+
+    private PendingIntent buildPendingIntent(Video video) {
+        Intent detailsIntent = new Intent(this, PlayerActivity.class);
+        detailsIntent.putExtra(Video.INTENT_EXTRA_VIDEO, video);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(VideoDetailsActivity.class);
+        stackBuilder.addNextIntent(detailsIntent);
+        // Ensure a unique PendingIntents, otherwise all recommendations end up with the same
+        // PendingIntent
+        detailsIntent.setAction(Long.toString(video.getId()));
+
+        PendingIntent intent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        return intent;
+    }
+
+&rarr; Finally catch potential errors and you should have something similar to the code below.
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -55,8 +107,6 @@ use the same video selections as the browse fragment.
                 PendingIntent pendingIntent = buildPendingIntent(video);
                 Bundle extras = new Bundle();
                 extras.putString(EXTRA_BACKGROUND_IMAGE_URL, video.getThumbUrl());
-
-                buildRecommendation(getApplicationContext(), video, count);
                 count++;
             }
             cursor.close();
@@ -73,7 +123,8 @@ use the same video selections as the browse fragment.
 
 Once the recommended videos are loaded, the service must create recommendations and pass them to the Android framework. The framework receives the recommendations as Notification objects that use a specific template and are marked with a specific category.
 
-The following code example demonstrates how to get an instance of the NotificationManager, build a recommendation, and post it to the manager:
+The following code example demonstrates how to get an instance of the NotificationManager, build a recommendation, and post it to the manager.  This code needs to be added to the while loop after
+ the PendingIntent has been created.
 
     Bitmap image = Picasso.with(getApplicationContext())
             .load(video.getThumbUrl())
@@ -113,7 +164,7 @@ In order for this service to be recognized by the system and run, register it us
 </pre>
 
 
-### Running the Recommendations Service
+### Run the recommendations service
 
 Your app's recommendation service must run periodically in order to create current recommendations. To run your service, create a class that runs a timer and invokes it at regular intervals. The following code example extends the BroadcastReceiver class to start periodic execution of a recommendation service every 1/2 hour:
 
@@ -144,7 +195,8 @@ Your app's recommendation service must run periodically in order to create curre
 
 ### Add boot receiver to Android manifest
 
-This implementation of the BroadcastReceiver class must run after start up of the TV device where it is installed. To accomplish this, register this class in your app manifest with an intent filter that listens for the completion of the device boot process. The following sample code demonstrates how to add this configuration to the manifest:
+This implementation of the BroadcastReceiver class must run after start up of the TV device where it is installed. To accomplish this, register this class in your app manifest with an intent filter that listens for the completion of the device boot process. The following sample code demonstrates how to add this configuration to the manifest.
+
 <code><pre>&lt;manifest ... &gt;
   &lt;application ... &gt;
     &lt;receiver android:name=&quot;com.android.example.leanback.fastlane.BootCompleteReceiver&quot; android:enabled=&quot;true&quot;
@@ -157,10 +209,10 @@ This implementation of the BroadcastReceiver class must run after start up of th
 &lt;/manifest&gt;
 </pre></code>
 
-<strong>Important:</strong> Receiving a boot completed notification requires that your app
+<aside class="callout"><strong>Important:</strong> Receiving a boot completed notification requires that your app
   requests the <code><a href="/reference/android/Manifest.permission.html#RECEIVE_BOOT_COMPLETED">RECEIVE_BOOT_COMPLETED</a></code> permission.
   For more information, see <code><a href="/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED">ACTION_BOOT_COMPLETED</a></code>.
-
+</aside>
 
 ### Summary
 
