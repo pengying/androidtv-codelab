@@ -20,7 +20,7 @@ The Leanback library support developers in creating immersive TV experiences. Th
 - Implementing a Picasso <a href="https://square.github.io/picasso/javadoc/com/squareup/picasso/Target.html">Target</a>
 
 
-###Step 1 - Create BackgroundHelper
+###Create BackgroundHelper
 
 <p>Create a class <code>BackgroundHelper</code> which we are going to extend step by step to add functionality to change the background image for our TV activities..</p>
 

@@ -45,13 +45,13 @@ and menu related methods.
 following.  Here, we're specifying that the Activity consists of a single fragment
 `VideoDetailsFragment`.
 
-    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-    &lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-        android:name=&quot;com.android.example.leanback.fastlane.VideoDetailsFragment&quot;
-        android:id=&quot;@+id/details_fragment&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-    /&gt;
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:name=&quot;com.android.example.leanback.fastlane.VideoDetailsFragment&quot;
+    android:id=&quot;@+id/details_fragment&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+/&gt;</pre>
 
 Don't worry about the errors we'll work on creating the Fragment in an upcoming step.
 
@@ -63,11 +63,10 @@ in the manifest.
 We need to update the style of this Activity to Leanback.  We can re-use the AppTheme we defined
 previous which inherits from Leanback.
 
-<pre>&lt;activity
-android:name=&quot;.fastlane.VideoDetailsActivity&quot;
-      android:label=&quot;@string/title_activity_player&quot;
-      <strong>android:theme=&quot;@style/AppTheme&quot;</strong>
-android:exported=&quot;true&quot;&gt;
+<pre>&lt;activity android:name=&quot;.fastlane.VideoDetailsActivity&quot;
+    android:label=&quot;@string/title_activity_player&quot;
+    <strong>android:theme=&quot;@style/AppTheme&quot;</strong>
+    android:exported=&quot;true&quot;&gt;
 &lt;/activity&gt;</pre>
 
 Now that the activity is styled correctly.  We need to create the VideoDetailsFragment that we
@@ -340,8 +339,16 @@ As we now pass the `Video` object with an `Intent` we need a key `Video
 Congrats, you've finished this step! Compile, run and watch how you can play videos now!
 
 <figure layout vertical center>
- <img src="img/details_overview_row.png" width="600px">
+  <img class="sample" src="img/details_fragment.png" style="border: 1px solid #ccc;" width="600px">
 </figure>
+
+### Summary
+
+In this step you've learned about:
+
+- DetailsFragment
+- Details row presenters
+- How to add a recommendations row
 
 ### Next up
 
