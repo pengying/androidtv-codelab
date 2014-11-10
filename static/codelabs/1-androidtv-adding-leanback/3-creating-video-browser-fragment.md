@@ -2,10 +2,10 @@
 
 In this step we'll learn about how the Leanback `BrowseFragment` works and put some content into it.
 
-Lets get started.
+Let's get started.
 
 ### Concepts
-First, lets cover how the `BrowseFragment` works.  The `BrowseFragment` is basically a View that renders rows of data that you provide.
+First, let's cover how the `BrowseFragment` works.  The `BrowseFragment` is basically a View that renders rows of data that you provide.
 
 <figure layout vertical center>
   <img src="img/browse_fragment_model.png" alt="browse fragment" class="noborder" width="600px">
@@ -21,7 +21,7 @@ To tie your video data and the `ImageCardView` together, we use a `Presenter`.  
 
 Lastly we have the [`ViewHolder`](https://developer.android.com/reference/android/support/v17/leanback/widget/Presenter.ViewHolder.html)  which is a container for the created view.
 
-Lets put all of these concepts together to create the video browsing experience.
+Let's put all of these concepts together to create the video browsing experience.
 
 ### Create a presenter
 
@@ -36,18 +36,16 @@ We need to create a presenter to tie our `Video` model to the `ImageCardView`.
 
     private static Context mContext;
 
-&rarr; Import the `Presenter` package and implement the abstract methods `onCreateViewHolder`, `onBindViewHolder`, and `onUnbindViewHolder`.
+&rarr; Implement the abstract methods `onCreateViewHolder`, `onBindViewHolder`, and `onUnbindViewHolder` by clicking on control I, or Code > Implement Methods.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup) {
       return null;
     }
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Object o) {
 
     }
-
     @Override
     public void onUnbindViewHolder(ViewHolder viewHolder) {
 
@@ -62,7 +60,7 @@ The base sample app already uses Picasso so this should be done for you.  But if
     <pre>compile 'com.squareup.picasso:picasso:2.3.4'</pre>
 </aside>
 
-&rarr; Create a PiccasoImageCardViewTarget implementing Target and implement it's onBitmapLoaded, onBitmapFailed and onPrepareLoad methods.
+&rarr; Create an inner static class PiccasoImageCardViewTarget implementing com.squareup.picasso.Target and click on control I to implement the methods: onBitmapLoaded, onBitmapFailed and onPrepareLoad methods.
 
     static class PicassoImageCardViewTarget implements Target {
 
@@ -99,13 +97,13 @@ The base sample app already uses Picasso so this should be done for you.  But if
 
 &rarr; In `onBitmapFailed`, we set the ImageCardView image to the error default.
 
-    mImageCardView.setMainImage(drawable);
+    mImageCardView.setMainImage(errorDrawable);
 
 ### Create ViewHolder class
 
 We'll use the `ViewHolder` pattern to store all of the data associated with the view.
 
-&rarr; Create a static class that extends `Presenter.ViewHolder` and create the default constructor.
+&rarr; Create an inner static class that extends `Presenter.ViewHolder` and create the default constructor.
 
     static class ViewHolder extends Presenter.ViewHolder {
 
@@ -186,11 +184,15 @@ We define the data binding logic in `onBindViewHolder`.  We can cast the Object 
         ((ViewHolder) viewHolder).updateCardViewImage(video.getThumbUrl());
     }
 
+Make sure to include the Video class:
+
+    import com.android.example.leanback.data.Video;
+
 And our CardPresenter is complete.  Lets fill out some ListRows with our video content.
 
 ### Populating the videos
 
-In the `LeanbackBrowseFragment` lets create some sample categories.  Here we're defining them as constants, but in a real app you would probably pull them from your database.
+In the `LeanbackBrowseFragment` let's create some sample categories.  Here we're defining them as constants, but in a real app you would probably pull them from your database.
 
     private static final String[] HEADERS = new String[]{
         "Featured", "Popular","Editor's choice"
@@ -200,17 +202,43 @@ Now in `init` after we've set the badge drawable we'll loop through the categori
 
 In each row, we'll create an ObjectAdapter to define how to render the content that well pull from our database.  We'll load the videos, create a header, finally instantiating a `ListRow` with the header and video data and adding it to `mRowsAdapter`.
 
-    for (int position = 0; position < HEADERS.length; position++) {
-        ObjectAdapter rowContents = new CursorObjectAdapter((new SinglePresenterSelector(new CardPresenter())));
-        VideoDataManager manager = new VideoDataManager(getActivity(),
-            getLoaderManager(),
-            VideoItemContract.VideoItem.buildDirUri(),
-            rowContents );
-        manager.startDataLoading();
+    public void init() {
+        mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+        setAdapter(mRowsAdapter);
 
-        HeaderItem headerItem = new HeaderItem(position, HEADERS[position], null);
-        mRowsAdapter.add(new ListRow(headerItem, manager.getItemList()));
+        setBrandColor(getResources().getColor(R.color.primary));
+        setBadgeDrawable(getResources().getDrawable(R.drawable.filmi));
+
+        for (int position = 0; position < HEADERS.length; position++) {
+            ObjectAdapter rowContents = new CursorObjectAdapter((new SinglePresenterSelector(new CardPresenter())));
+            VideoDataManager manager = new VideoDataManager(getActivity(),
+                    getLoaderManager(),
+                    VideoItemContract.VideoItem.buildDirUri(),
+                    rowContents );
+            manager.startDataLoading();
+
+            HeaderItem headerItem = new HeaderItem(position, HEADERS[position], null);
+            mRowsAdapter.add(new ListRow(headerItem, manager.getItemList()));
+        }
     }
+
+Edit the class: data.VideoDataManager to add ObjectAdapter as fourth parameter to VideoDataManager constructor:
+
+    public VideoDataManager(Context mContext, LoaderManager mLoaderManager, Uri mRowUri, ObjectAdapter rowContents) {
+        mItemList = rowContents;
+        ....
+    }
+
+Also add a private ObjectAdapter to the class VideoDataManager:
+
+    private ObjectAdapter mItemList;
+
+And create the method:
+
+    public ObjectAdapter getItemList() {
+        return mItemList;
+    }
+
 
 Congrats!  You've completed this step.  Try running the App on Android TV.  You should see a screen similar to the one below.
 

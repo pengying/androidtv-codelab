@@ -20,7 +20,7 @@ Under dependencies add the following
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:cardview-v7:21.0.+'
 
-There are a few things to note here as well.  The Leanback libraries target API version 21 are only backwards compatible to API version 17.  For apps that require support for previous versions of Android, we recommend creating separate apks and handling versioning through Play Store configuration.
+There are a few things to note here as well.  The Leanback libraries target API version 21 are only backwards compatible to API version 17.  For apps that require support for previous versions of Android, you should make sure that the code path utilizing libraries with higher minSdk does not run on devices with version < minSdk(library)
 
 Next, lets take create a browsing activity.
 
@@ -30,11 +30,11 @@ In the Android Studio project explorer create a new package under `com.android.e
 
 <img src="img/project_explorer.png">
 
-Under `fastlane` create a new `Blank Activity` called `LeanbackActivity`.
+Under `fastlane` right click to create a new `Blank Activity` called `LeanbackActivity`, and click on Finish.
 
 <img src="img/create_leanback_activity.png">
 
-Delete the `menu_leanback.xml` resource since it won't be used.  In the LeanbackActivity class, delete the `onCreateOptionsMenu` and `onOptionsItemSelected` functions.
+Once the class is created, delete the `menu/menu_leanback.xml` resource since it won't be used.  In the LeanbackActivity class, delete the `onCreateOptionsMenu` and `onOptionsItemSelected` functions.
 
 ### Declare launcher activity for Android TV
 
@@ -45,7 +45,7 @@ First, declare that we want to use leanback.  As a child of manifest add the fol
     <uses-feature android:name="android.software.leanback"
             android:required="false" />
 
-To the LeanbackActivity we need to add an intent filter.
+Add an intent filter to the LeanbackActivity tag. `android.intent.category.LEANBACK_LAUNCHER` tells Android TV to launch  `LeanbackActivity` when the application is run.
 
 <pre>
     &lt;activity
@@ -59,14 +59,12 @@ To the LeanbackActivity we need to add an intent filter.
     &lt;/activity&gt;
  </pre>
 
-`android.intent.category.LEANBACK_LAUNCHER` tells Android TV to launch  `LeanbackActivity` when the application is run.
-
-We also add a theme.  In the next step we create a values-television directory and create a values specific to television
+We are also adding a theme to the activity. In the next step we will create a values-television directory and create a values specific to television.
 
 <aside class="callout">
 <h4>Handling unsupported hardware features</h4>
 
-Since certain features are not available on TV, you need to define their requirement as optional.  If you use any of the following features you'll need to add `android:required=&quot;false&quot;` to the definition
+Since certain features are not available on TV, you need to define their requirement as optional.  If you use any of the following features you'll need to add `android:required="false"` to the definition
 
 <table>
   <tbody><tr>
@@ -150,7 +148,7 @@ We want to create some values that are specifically for Android TV.
 
 ### Add an Android TV app banner
 
-Add `android:banner` under the application element to define the app banner.  The banner is the app launch point that appears on the home screen in the apps and games rows.
+In the manifest, add `android:banner` under the application element to define the app banner.  The banner is the app launch point that appears on the home screen in the apps and games rows.
 
 <pre>
 &lt;application
