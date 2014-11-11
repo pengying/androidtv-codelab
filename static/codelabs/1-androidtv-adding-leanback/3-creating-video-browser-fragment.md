@@ -146,7 +146,7 @@ and create the default constructor.
 
         Picasso.with(mContext)
                 .load(url)
-                .resize(CARD_WIDTH, CARD_HEIGHT)
+                .resize(CARD_WIDTH * 2, CARD_HEIGHT * 2)
                 .centerCrop()
                 .error(mDefaultCardImage)
                 .into(mImageCardViewTarget);
