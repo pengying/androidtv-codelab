@@ -250,6 +250,13 @@ constructor and store the ObjectAdapter as mItemList.
         ....
     }
 
+In `VideoDataManager` set the LOADER_ID to a random integer and replace the video instantiation with
+setting the mapper for
+`mItemList`.
+
+    LOADER_ID = Double.valueOf(Math.random() * Integer.MAX_VALUE).intValue();
+    ((CursorObjectAdapter)mItemList).setMapper(mMapper);
+
 Create the a getter for the ObjectAdapter.
 
     public ObjectAdapter getItemList() {
