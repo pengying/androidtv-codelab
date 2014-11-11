@@ -80,7 +80,7 @@ Let's run it on a phone.
 </div>
 
 <aside class="callout">
-If you want to learn more about querying databases take a look at our [documentation](http://developer.android.com/training/basics/data-storage/databases.html).
+The application stores all its data in a ContentProvider backed up by a SQLite database.  If you want to learn more about querying databases take a look at our [documentation](http://developer.android.com/training/basics/data-storage/databases.html).
 </aside>
 
 Here's what it should look like.
