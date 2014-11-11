@@ -226,7 +226,12 @@ This implementation of the `BroadcastReceiver` class must run after start up of 
   For more information, see <code><a href="/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED">ACTION_BOOT_COMPLETED</a></code>.
 </aside>
 
-Congrats, you've completed adding recommendations for your app.  Try running it and you should start seeing recommendations after 30 minutes.
+Congrats, you've completed adding recommendations for your app.
+
+Try running it and you should start seeing recommendations after 30 minutes.  If you want to see
+something immediately, star the service through adb.
+
+    adb shell am startservice com.android.example.leanback/.fastlane.RecommendationsService
 
 ### Summary
 
