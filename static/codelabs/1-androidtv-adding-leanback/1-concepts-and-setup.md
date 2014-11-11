@@ -55,9 +55,11 @@ Click on "Open Existing Project" on the next dialog.
 ### Understanding the starter project
 All right, `checkpoint_0` is the base app that we'll be building upon. <img src="img/checkpoint_0.png">
 
+You will be adding code from each step to `checkpoint_0`.
+
 Each of the following checkpoints can be used as reference points to check your work or for help
 if you encounter any issues.  The checkpoint number corresponds with the codelab step - 1.  (0 vs
- 1 indexing)
+ 1 indexing)g
 
 A brief overview of each of the components:
 
