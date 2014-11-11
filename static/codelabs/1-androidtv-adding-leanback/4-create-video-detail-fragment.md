@@ -58,7 +58,7 @@ Don't worry about the errors we'll work on creating the Fragment in an upcoming 
 Now that we have the activity framework, lets add the Leanback style to the activity declaration
 in the manifest.
 
-### Update Activity Style in the manifest
+### Update Activity theme in the manifest
 
 We need to update the style of this Activity to Leanback.  We can re-use the AppTheme we defined
 previous which inherits from Leanback.
@@ -76,7 +76,7 @@ reference in the layout.
 
 Under `fastlane` create a new class called `VideoDetailsFragment` extending [`DetailsFragment`](https://developer.android.com/reference/android/support/v17/leanback/app/DetailsFragment.html).
 
-We'll define a few class variables to store the Video information and some Constants for image
+We'll define a few class variables to store the Video information and some constants for image
 sizes and action ids.
 
     private Video selectedVideo;
@@ -87,13 +87,14 @@ sizes and action ids.
 
 In `VideoDetailsFragment`, we need to do several things:
 
+* Define the details presenter
 * Load the movie thumbnail image
 * Create a `DetailsOverviewRow` to display video details
 * Create a presenter to bind the video data to the view
 * Add a `ListRow` for recommended items
 * Handle user actions
 
-Lets start by getting the selected video from the intent.  We'll override onCreate and get the
+Lets start by getting the selected video from the intent.  We'll override `onCreate` and get the
 video from the intent.
 
 
@@ -108,17 +109,19 @@ video from the intent.
 ### Create DetailsDescriptionPresenter
 
 Before we get the image and create the `DetailsOverviewRow` we need to define a Presenter to bind
- the data.  by the leanback library, you use presenter objects to control the display of data on screen, including media item details. The framework provides the <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/AbstractDetailsDescriptionPresenter.html"><code>AbstractDetailsDescriptionPresenter</code></a> class for this purpose, which is a nearly complete implementation of the presenter for media item details.
+ the data.  The Leanback framework provides the <a href="https://developer.android
+ .com/reference/android/support/v17/leanback/widget/AbstractDetailsDescriptionPresenter.html"><code>AbstractDetailsDescriptionPresenter</code></a> class for this purpose, a nearly complete implementation of the presenter for media item details.
 
 &rarr; Under `fastlane` create a new class `DetailsDescriptionPresenter` extending
-AbstractDetailsDescriptionPresenter.
+`AbstractDetailsDescriptionPresenter`.
 
-&rarr; Override onBindDescription.  Cast the item as a `Video` object then get and set the `Title`,
+&rarr; Override `onBindDescription`.  Cast the item as a `Video` object then get and set the
+`Title`,
  `Subtitle` and `Body`.
 
     @Override
-    protected void onBindDescription(ViewHolder viewHolder, Object item) {
-        Video video = (Video) item;
+    protected void onBindDescription(ViewHolder viewHolder, Object o) {
+        Video video = (Video) o;
 
         if (video != null) {
             Log.d("DetailsDescriptionPresenter", String.format("%s, %s, %s", video.getTitle(), video.getThumbUrl(), video.getDescription()));
@@ -131,10 +134,12 @@ AbstractDetailsDescriptionPresenter.
 
 ### Create AsyncTask to load the image
 
-In order to not block the main UI thread, we create an AsyncTask to load the thumbnail
-bitmap.
+In order to not block the main UI thread, we create an `AsyncTask` to load the thumbnail
+bitmap.  In `VideoDetailsFragment` create a `DetailsRowBuilderTask` class extending AsyncTask
+with `Video`, `Integer`, and `DetailsOverviewRow` as the parameter, progress, and result
+respectively.
 
-    private class DetailRowBuilderTask extends AsyncTask&lt;Video, Integer, DetailsOverviewRow&gt; {
+    private class DetailRowBuilderTask extends AsyncTask<Video, Integer, DetailsOverviewRow> {
         @Override
         protected DetailsOverviewRow doInBackground(Video... videos) {
             DetailsOverviewRow row = new DetailsOverviewRow(videos[0]);
@@ -157,14 +162,21 @@ bitmap.
         }
     }
 
-Here we're instantiating a new `DetailsOverViewRow` passing in the current Video.  We create a
+Here we're instantiating a new [`DetailsOverviewRow`](https://developer.android.com/reference/android/support/v17/leanback/widget/DetailsOverviewRow.html) passing in the current `Video` as the main
+item
+ for the details page.  We create a
 holder `Bitmap` variable to load the thumbnail.  We use Picasso to load and resize the image and
 store in poster.
 
 Next we set poster as the bitmap.
 
-Finally we set the actions of the row.  I this case, we have `ACTION_PLAY` and
-`ACTION_WATCH_LATER`, but you could as well have a purchase or rent action.
+Finally, we set the actions of the row.  In this app, we have `ACTION_PLAY` and
+`ACTION_WATCH_LATER`, but you could define a purchase or rent action.
+
+In strings.xml define the text for `action_play` and `action_watch_later`.
+
+    <string name="action_play">PLAY</string>
+    <string name="action_watch_later">WATCH LATER</string>
 
 To assist in calculating the appropriate screen size in DP, create a utility function.
 
@@ -180,7 +192,7 @@ Now that the image has loaded, we can create the rest of the details fragment
 
 The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and resizes the image off the UI thread. After it has completed we create the presenters in the <code>onPostExecute</code> method of the <code>AsyncTask</code> and set the adapter of the <code>DetailsFragment</code>
 
-&rarr; Override onPostExecute
+&rarr; Override `onPostExecute`.
 
     @Override
     protected void onPostExecute(DetailsOverviewRow detailRow) {
@@ -210,13 +222,13 @@ The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and
          public void onActionClicked(Action action) {
              if (action.getId() == ACTION_PLAY) {
                  Intent intent = new Intent(getActivity(), PlayerActivity.class);
-         intent.putExtra(LeanbackActivity.VIDEO, (Serializable)selectedVideo);
+         intent.putExtra(Video.INTENT_EXTRA_VIDEO, (Serializable)selectedVideo);
                  startActivity(intent);
              } else {
                  Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
              }
          }
-     }
+     });
 
 &rarr; Add the DetailsOverviewRowPresenter to ClassPresenterSelector.
 
@@ -224,7 +236,7 @@ The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and
 
 &rarr; Instantiate a new `ArrayObjectAdapter` passing in the `ClassPresenterSelector`.  Then, add
  the
-DetailRow to the `ArrayObjectAdapter`.
+`DetailRow` to the `ArrayObjectAdapter`.
 
     ArrayObjectAdapter adapter = new ArrayObjectAdapter(ps);
     adapter.add(detailRow);
@@ -276,12 +288,12 @@ First, let's add an additional presenter:
     ps.addClassPresenter(ListRow.class, new ListRowPresenter());
 
 
-Accordingly the <code>ArrayObjectAdapter</code> requires an additional `ListRow` to be
+Accordingly, the <code>ArrayObjectAdapter</code> requires an additional `ListRow` to be
 added. We create a new `ListRow` to which we pass a `HeaderItem` and a
-`CursorObjectAdapater` in the constructor just like we did for the BrowseFragment.
+`CursorObjectAdapater` in the constructor just like we did for the `BrowseFragment`.
 
     String subcategories[] = {
-      You may also like"
+      "You may also like"
     };
 
     CursorObjectAdapter rowAdapter = new CursorObjectAdapter(
@@ -295,16 +307,19 @@ added. We create a new `ListRow` to which we pass a `HeaderItem` and a
 
 ### Executing the builder task to build the view
 
-Now we instantiate and execute the DetailRowBuilderTask in the onCreate method of
-the VideoDetailsFragment:
+Now we instantiate and execute the `DetailRowBuilderTask` in the `onCreate` method of
+the `VideoDetailsFragment`.
 
     new DetailRowBuilderTask().execute(selectedVideo);
 
 ### Create Intent from the browse activity to the details activity
 
-After you have implemented the DetailsFragment, modify your main media browsing view to move to your details view when a user clicks on a media item. In order to enable this behavior, add an <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/OnItemViewClickedListener.html"><code>OnItemViewClickedListener</code></a> object to the LeanbackBrowseFragment that fires an intent to start the item details activity.
+Now that we've completed the `DetailsFragment`, we need to modify the browsing fragment to intent
+ to
+the details view when a user clicks on a media item. In order to enable this behavior, add an <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/OnItemViewClickedListener.html"><code>OnItemViewClickedListener</code></a> object to `LeanbackBrowseFragment` that fires an intent to start `VideoDetailsActivity`.
 
-The following example shows how to implement a listener to start the details view when a user clicks a media item in the LeanbackBrowseFragment.
+In `init` set the `onItemViewClickedListener`.  Here we're using a helper function to generate
+the `onItemViewClickedListener`.
 
     public class LeanbackBrowseFragment extends BrowseFragment {
     ...
@@ -316,7 +331,7 @@ The following example shows how to implement a listener to start the details vie
     ...
     }
 
-and create the method `getDefaultItemViewClickerListener` which returns a new
+Create the helper function `getDefaultItemViewClickerListener` which returns a new
 `OnItemViewClickedListener`.
 
     private OnItemViewClickedListener getDefaultItemViewClickedListener() {
@@ -332,7 +347,7 @@ and create the method `getDefaultItemViewClickerListener` which returns a new
       };
     }
 
-As we now pass the `Video` object with an `Intent` we need a key `Video
+As we now pass the `Video` object with an `Intent` we use a key `Video
 .INTENT_EXTRA_VIDEO` for it.
 
 
@@ -352,4 +367,4 @@ In this step you've learned about:
 
 ### Next up
 
-Creating recommendations that display on the home screen
+Creating recommendations that display on the home screen.
