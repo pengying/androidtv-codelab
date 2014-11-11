@@ -36,18 +36,18 @@ We need to create a presenter to tie our `Video` model to the `ImageCardView`.
 
     private static Context mContext;
 
-&rarr; Implement the abstract methods `onCreateViewHolder`, `onBindViewHolder`, and `onUnbindViewHolder` by clicking on control I, or Code > Implement Methods.
+&rarr; Implement the abstract methods `onCreateViewHolder`, `onBindViewHolder`, and `onUnbindViewHolder`.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup) {
       return null;
     }
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, Object o) {
+    public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object o) {
 
     }
     @Override
-    public void onUnbindViewHolder(ViewHolder viewHolder) {
+    public void onUnbindViewHolder(Presenter.ViewHolder viewHolder) {
 
     }
 

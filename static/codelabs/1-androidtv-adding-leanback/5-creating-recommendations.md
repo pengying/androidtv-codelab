@@ -24,7 +24,7 @@ Content recommendations are created with background processing. In order for you
 
     public class RecommendationsService extends IntentService
 
-&rarr; We'll define a few constants for rendering and tagging, and define a NotificaitonManager
+&rarr; We'll define a few constants for rendering and tagging, and define a `NotificationManager`
 
     private static final String TAG = "RecommendationsService";
     private static final int MAX_RECOMMENDATIONS = 3;
@@ -33,15 +33,26 @@ Content recommendations are created with background processing. In order for you
     private static final int DETAIL_THUMB_HEIGHT = 274;
     private NotificationManager mNotificationManager;
 
-&rarr; Next override the onHandleIntent function.  As an example recommendation service, we'll
+&rarr;  Create the default constructor.
+
+    public RecommendationsService() {
+        super("RecommendationsService");
+    }
+
+&rarr; Next override the `onHandleIntent` function.  As an example recommendation service, we'll
 use the same video selections as the browse fragment.  We store a `ContentProviderClient`, then
 create a `Cursor` from the client.
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        ContentProviderClient client = getContentResolver().acquireContentProviderClient(VideoItemContract.VideoItem.buildDirUri());
+        ContentProviderClient client = getContentResolver()
+            .acquireContentProviderClient(VideoItemContract.VideoItem.buildDirUri());
         try {
-            Cursor cursor = client.query(VideoItemContract.VideoItem.buildDirUri(), VideoDataManager.PROJECTION, null, null, VideoItemContract.VideoItem.DEFAULT_SORT);
+            Cursor cursor = client.query(VideoItemContract.VideoItem.buildDirUri(),
+                VideoDataManager.PROJECTION,
+                null,
+                null,
+                VideoItemContract.VideoItem.DEFAULT_SORT);
 
 &rarr; Instantiate a `VideoItemMapper` that we've defined in `VideoDataManager` and map it to
 cursor with `bindColumns`.
@@ -49,7 +60,7 @@ cursor with `bindColumns`.
     VideoDataManager.VideoItemMapper mapper = new VideoDataManager.VideoItemMapper();
           mapper.bindColumns(cursor);
 
-&rarr;  Instantiate a NotificationManager.
+&rarr;  Instantiate a `NotificationManager`.
 
     mNotificationManager = (NotificationManager) getApplicationContext()
           .getSystemService(Context.NOTIFICATION_SERVICE);
@@ -87,7 +98,8 @@ cursor with `bindColumns`.
         return intent;
     }
 
-&rarr; Finally catch potential errors and you should have something similar to the code below.
+&rarr; Finally close the cursor and catch potential errors and you should have something similar to
+the code below.
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -123,8 +135,8 @@ cursor with `bindColumns`.
 
 Once the recommended videos are loaded, the service must create recommendations and pass them to the Android framework. The framework receives the recommendations as Notification objects that use a specific template and are marked with a specific category.
 
-The following code example demonstrates how to get an instance of the NotificationManager, build a recommendation, and post it to the manager.  This code needs to be added to the while loop after
- the PendingIntent has been created.
+The following code example demonstrates how to get an instance of the `NotificationManager`, build a recommendation, and pass it to the manager.  This code needs to be added in the `while loop` after
+ the `PendingIntent` has been created.
 
     Bitmap image = Picasso.with(getApplicationContext())
             .load(video.getThumbUrl())
@@ -166,7 +178,7 @@ In order for this service to be recognized by the system and run, register it us
 
 ### Run the recommendations service
 
-Your app's recommendation service must run periodically in order to create current recommendations. To run your service, create a class that runs a timer and invokes it at regular intervals. The following code example extends the BroadcastReceiver class to start periodic execution of a recommendation service every 1/2 hour:
+Your app's recommendation service must run periodically in order to create current recommendations. To run your service, create a class that runs a timer and invokes it at regular intervals. The following code example extends the `BroadcastReceiver` class to start periodic execution of a recommendation service every 1/2 hour:
 
     public class BootCompleteReceiver extends BroadcastReceiver {
         private static final long INITIAL_DELAY = 5000;
@@ -195,7 +207,7 @@ Your app's recommendation service must run periodically in order to create curre
 
 ### Add boot receiver to Android manifest
 
-This implementation of the BroadcastReceiver class must run after start up of the TV device where it is installed. To accomplish this, register this class in your app manifest with an intent filter that listens for the completion of the device boot process. The following sample code demonstrates how to add this configuration to the manifest.
+This implementation of the `BroadcastReceiver` class must run after start up of the TV device where it is installed. To accomplish this, register this class in your app manifest with an intent filter that listens for the completion of the device boot process. The following  code demonstrates how to add this configuration to the manifest.
 
 <code><pre>&lt;manifest ... &gt;
   &lt;application ... &gt;
