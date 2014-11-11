@@ -292,7 +292,8 @@ and use it in the <code>onCreate</code> method.
 Congrats, you've completed the codelab!
 <aside class="callout">
 We have some bonus content on leveraging the
-PlaybackOverlayFragment to easily playback controls.  The example for adding a
-PlaybackOverlayFragment to an existing player and detecting appropriate playback countrols can be
+<code>PlaybackOverlayFragment</code> to easily playback controls.  The example for adding a
+<code>PlaybackOverlayFragment</code> to an existing player and detecting appropriate playback countrols can be
  found in `checkpoint_6`.
+The <code>PlaybackOverlayFragment</code> also allows you to help users find related content in your app without stopping playback.
 </aside>
