@@ -183,7 +183,7 @@ Next lets fill out the class a little bit
 &rarr; We'll also add a helper function to initialize the fragment.  In it we instantiate `mRowsAdapter`, set it as the Adapter for the fragment then set our main color and badge which appears in the top right of the browse view.
 
     public void init() {
-        mRowsAdapter = new ArrayObjectAdapter();
+        mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         setAdapter(mRowsAdapter);
 
         setBrandColor(getResources().getColor(R.color.primary));
