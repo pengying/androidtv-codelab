@@ -287,7 +287,14 @@ Fill in `onLoaderReset` to set the `Cursor` as null
 Congrats!  You've completed this step.  Try running the App on Android TV.  You should see a screen similar to the one below.
 
 <aside class="callout">
-When running the app from Android Studio, the standard launcher activity loads.  On Android TV back out to the home screen and start the app from Android TV to launch into the proper activity.
+You can modify the default Activity that's launched from Android Studio.
+
+Click `Edit configuration` <img src="img/edit_configuration.png" width="200px">
+<br />
+<br />
+Under `Activity` change the radio button to launch `LeanbackActivity`.
+<br/>
+<img src="img/run_configuration.png" width="500px">
 </aside>
 
 <figure layout vertical center>
