@@ -296,4 +296,9 @@ We have some bonus content on leveraging the
 <code>PlaybackOverlayFragment</code> to an existing player and detecting appropriate playback countrols can be
  found in `checkpoint_6`.
 The <code>PlaybackOverlayFragment</code> also allows you to help users find related content in your app without stopping playback.
+<br />
+<br />
+If you're looking for sample code for additional features, checkout our <a href="https://github
+.com/googlesamples/androidtv-Leanback">full sample</a>.  It includes sample code for the search
+fragment, grid fragment and others.
 </aside>
