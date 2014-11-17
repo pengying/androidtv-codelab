@@ -222,8 +222,8 @@ This implementation of the `BroadcastReceiver` class must run after start up of 
 </pre></code>
 
 <aside class="callout"><strong>Important:</strong> Receiving a boot completed notification requires that your app
-  requests the <code><a href="/reference/android/Manifest.permission.html#RECEIVE_BOOT_COMPLETED">RECEIVE_BOOT_COMPLETED</a></code> permission.
-  For more information, see <code><a href="/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED">ACTION_BOOT_COMPLETED</a></code>.
+  requests the <code><a href="http://developer.android.com/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED">RECEIVE_BOOT_COMPLETED</a></code> permission.
+  For more information, see <code><a href="http://developer.android.com/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED">ACTION_BOOT_COMPLETED</a></code>.
 </aside>
 
 Congrats, you've completed adding recommendations for your app.
