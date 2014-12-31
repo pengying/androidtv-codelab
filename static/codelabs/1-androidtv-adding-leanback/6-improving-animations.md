@@ -73,15 +73,18 @@ The interface <a href="https://square.github.io/picasso/javadoc/com/squareup/pic
 		
         @Override
         public boolean equals(Object o) {
-            if (this == o)
+            if (this == o) {
                 return true;
-            if (o == null || getClass() != o.getClass())
+            }
+            if (o == null || getClass() != o.getClass()) {
                 return false;
+            }
 				
             PicassoBackgroundManagerTarget that = (PicassoBackgroundManagerTarget) o;
 			
-            if (!mBackgroundManager.equals(that.mBackgroundManager))
+            if (!mBackgroundManager.equals(that.mBackgroundManager)) {
                 return false;
+            }
 				
             return true;
         }
@@ -203,7 +206,7 @@ We want the BlurTransformation to exists only once and make it a <a href="http:/
 
 The meat of this class is in the <code>transform</code> method which does the trick of blurring the image.
 
-	  @Override
+    @Override
     public Bitmap transform(Bitmap bitmap) {
         // Create another bitmap that will hold the results of the filter.
         Bitmap blurredBitmap = Bitmap.createBitmap(bitmap);
@@ -219,7 +222,7 @@ The meat of this class is in the <code>transform</code> method which does the tr
         // Set the blur radius
         script.setRadius(20);
 		
-        // Start the ScriptIntrinisicBlur
+        // Start the ScriptIntrinsicBlur
         script.forEach(output);
 		
         // Copy the output to the blurred bitmap
@@ -275,7 +278,7 @@ Now we just register the listener in the <code>init</code> method.
 
 ### Add background helper to the <code>VideoDetailsFragment</code>
 
-The background should also be set when the details of a video is shown. So we apply this in the <code>VideoDetailsFragment</code> as well. It simpler here because we don't require a listener. It's just added to the <code>onCrreate</code> method of the fragment.
+The background should also be set when the details of a video is shown. So we apply this in the <code>VideoDetailsFragment</code> as well. It simpler here because we don't require a listener. It's just added to the <code>onCreate</code> method of the fragment.
 
 Add the member variable:
 
