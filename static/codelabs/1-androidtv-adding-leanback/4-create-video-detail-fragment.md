@@ -28,7 +28,7 @@ The `DetailsOverviewRow` contains the video image, information and available act
 
 The `Additional Row` can be populated with a ListRow just like the BrowseFragment.
 
-All right lets create a video detail view.
+All right, let's create a video detail view.
 
 ### Create a new activity VideoDetailsActivity
 
@@ -145,11 +145,11 @@ respectively.
             DetailsOverviewRow row = new DetailsOverviewRow(videos[0]);
             Bitmap poster = null;
             try {
-          // the Picasso library helps us dealing with images
+                // the Picasso library helps us dealing with images
                 poster = Picasso.with(getActivity())
                         .load(videos[0].getThumbUrl())
                         .resize(dpToPx(DETAIL_THUMB_WIDTH, getActivity().getApplicationContext()),
-                              dpToPx(DETAIL_THUMB_HEIGHT, getActivity().getApplicationContext()))
+                                dpToPx(DETAIL_THUMB_HEIGHT, getActivity().getApplicationContext()))
                         .centerCrop()
                         .get();
             } catch (IOException e) {
@@ -190,7 +190,7 @@ Now that the image has loaded, we can create the rest of the details fragment
 
 ### Creating a Presenter when the task has finished executing
 
-The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and resizes the image off the UI thread. After it has completed we create the presenters in the <code>onPostExecute</code> method of the <code>AsyncTask</code> and set the adapter of the <code>DetailsFragment</code>
+The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and resizes the image off the UI thread. After it has completed we create the presenters in the <code>onPostExecute</code> method of the <code>AsyncTask</code> and set the adapter of the <code>DetailsFragment</code>.
 
 &rarr; Override `onPostExecute`.
 
@@ -202,27 +202,28 @@ The <a href="http://square.github.io/picasso/">Picasso library</a> loads and and
 
     ClassPresenterSelector ps = new ClassPresenterSelector();
 
-&rarr; Instantiate a new `DetailssOverViewRowPresenter` passing in a new Instance of
+&rarr; Instantiate a new `DetailsOverViewRowPresenter` passing in a new Instance of
 `DetailsDescriptionPresenter` as a parameter.
 
      DetailsOverviewRowPresenter dorPresenter = new DetailsOverviewRowPresenter(
          new DetailsDescriptionPresenter());
 
-&rarr; We can add a custom background color programatically
+&rarr; We can add a custom background color programmatically.
 
      dorPresenter.setBackgroundColor(getResources().getColor(R.color.primary));
+     dorPresenter.setStyleLarge(true);
 
 &rarr; Add an onOnActionClickedListener by creating a new OnActionClickedListener and implementing
  onActionClicked.  In onActionClicked, check the actionid.  If the action is `ACTION_PLAY` we
  want to Intent to the VideoPlayer Activity passing the video details.  Otherwise, we'll create a
   toast to display a String defining the action.
 
-     dorPresenter.setOnActionClickedListener( new OnActionClickedListener() {
+     dorPresenter.setOnActionClickedListener(new OnActionClickedListener() {
          @Override
          public void onActionClicked(Action action) {
              if (action.getId() == ACTION_PLAY) {
                  Intent intent = new Intent(getActivity(), PlayerActivity.class);
-         intent.putExtra(Video.INTENT_EXTRA_VIDEO, (Serializable)selectedVideo);
+                 intent.putExtra(Video.INTENT_EXTRA_VIDEO, selectedVideo);
                  startActivity(intent);
              } else {
                  Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
@@ -257,12 +258,12 @@ When we're done, the onPostExecute method should look like the following:
         dorPresenter.setBackgroundColor(getResources().getColor(R.color.primary));
         dorPresenter.setStyleLarge(true);
         // we listen to two different actions: play and show
-        dorPresenter.setOnActionClickedListener( new OnActionClickedListener() {
+        dorPresenter.setOnActionClickedListener(new OnActionClickedListener() {
             @Override
             public void onActionClicked(Action action) {
                 if (action.getId() == ACTION_PLAY) {
                     Intent intent = new Intent(getActivity(), PlayerActivity.class);
-            intent.putExtra(LeanbackActivity.VIDEO, (Serializable)selectedVideo);
+                    intent.putExtra(LeanbackActivity.VIDEO, selectedVideo);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
@@ -290,7 +291,7 @@ First, let's add an additional presenter:
 
 Accordingly, the <code>ArrayObjectAdapter</code> requires an additional `ListRow` to be
 added. We create a new `ListRow` to which we pass a `HeaderItem` and a
-`CursorObjectAdapater` in the constructor just like we did for the `BrowseFragment`.
+`CursorObjectAdapter` in the constructor just like we did for the `BrowseFragment`.
 
     String subcategories[] = {
       "You may also like"
@@ -314,8 +315,7 @@ the `VideoDetailsFragment`.
 
 ### Create Intent from the browse activity to the details activity
 
-Now that we've completed the `DetailsFragment`, we need to modify the browsing fragment to intent
- to
+Now that we've completed the `DetailsFragment`, we need to modify the browsing fragment to intent to
 the details view when a user clicks on a media item. In order to enable this behavior, add an <a href="https://developer.android.com/reference/android/support/v17/leanback/widget/OnItemViewClickedListener.html"><code>OnItemViewClickedListener</code></a> object to `LeanbackBrowseFragment` that fires an intent to start `VideoDetailsActivity`.
 
 In `init` set the `onItemViewClickedListener`.  Here we're using a helper function to generate
@@ -347,8 +347,7 @@ Create the helper function `getDefaultItemViewClickerListener` which returns a n
       };
     }
 
-As we now pass the `Video` object with an `Intent` we use a key `Video
-.INTENT_EXTRA_VIDEO` for it.
+As we now pass the `Video` object with an `Intent` we use a key `Video.INTENT_EXTRA_VIDEO` for it.
 
 
 Congrats, you've finished this step! Compile, run and watch how you can play videos now!
