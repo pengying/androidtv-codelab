@@ -6,13 +6,13 @@ In this step we'll put up the framework for the video browser fragment.  The key
 - Android manifest update for Android TV
 - Extending the Leanback `BrowseFragment`
 
-Lets get started.
+Let's get started.
 
 ### Add Leanback dependencies
 
-We'll need to add a few dependencies to the build.grade file before we can begin.
+We'll need to add a few dependencies to the build.gradle file before we can begin.
 
-Open the `build.grade (checkpoint_0)` file.
+Open the `build.gradle (checkpoint_0)` file.
 
 Under dependencies add the following
 
@@ -158,7 +158,7 @@ created `values-television`.  Name the resources file styles.xml.
         <item name="android:textStyle">bold</item>
     </style>
 
-We've included Leanback libraries, and now Android TV will launch into the correct activity.  Lets create the video browser.
+We've included Leanback libraries, and now Android TV will launch into the correct activity.  Let's create the video browser.
 
 ### Create a fragment that extends BrowseFragment
 
@@ -174,7 +174,7 @@ The first step is to create a class that extends BrowseFragment.
 
 &rarr; Under `fastlane` create a new empty class called `LeanbackBrowseFragment` that extends `BrowseFragment`.
 
-Next lets fill out the class a little bit
+Next let's fill out the class a little bit.
 
 &rarr; To the class, add a private member ArrayObjectAdapter.  We'll get into details about ArrayObjectAdapter in the next step.
 
@@ -202,7 +202,7 @@ All right onto the final step of this section, adding this fragment to the activ
 
 ### Add fragment to activity
 
-Open up `activity_leanback.xml` under `layouts` and delete everything.  The only thing we'll display in this activity is our `LeanbackBrowseFragment` fragment.  So add the following:
+Open up `activity_leanback.xml` under `layout` and delete everything.  The only thing we'll display in this activity is our `LeanbackBrowseFragment` fragment.  So add the following:
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/main_frame"
