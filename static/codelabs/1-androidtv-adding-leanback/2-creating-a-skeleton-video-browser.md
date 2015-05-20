@@ -16,7 +16,7 @@ Open the `build.gradle (checkpoint_0)` file.
 
 Under dependencies add the following
 
-    compile 'com.android.support:leanback-v17:+'
+    compile 'com.android.support:leanback-v17:21.+'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:cardview-v7:21.0.+'
 
