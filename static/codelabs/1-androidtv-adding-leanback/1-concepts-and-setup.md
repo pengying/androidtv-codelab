@@ -4,7 +4,7 @@ In this codelab, you'll learn how to quickly enable a mobile app for Android TV 
 
 ### Concepts
 
-To start off lets learn a little bit about Android TV.  What is Android TV and how is it different?  At it's core, it is Android so most of the things that you've learned developing your mobile app can be reused.  The key difference is input and the presentation of information.
+To start off let's learn a little bit about Android TV.  What is Android TV and how is it different?  At its core, it is Android so most of the things that you've learned developing your mobile app can be reused.  The key difference is input and the presentation of information.
 
 <figure layout vertical center>
   <img src="img/tv.png" alt="Android TV" class="noborder">
@@ -99,7 +99,7 @@ First we need to connect to the Android TV device.  In order to that you can use
 
 #### On the Android TV
 
-Lets enable developer mode if it's not yet enabled.
+Let's enable developer mode if it's not yet enabled.
 <div class="stepbystep">
 <ul>
 <li>Open <strong>Settings</strong></li>
@@ -115,9 +115,9 @@ Lets enable developer mode if it's not yet enabled.
 Now we need to find the ip of the device.
 <div class="stepbystep">
 <ul>
-<li>Back out to the main Settings page and click <strong>Network</strong>.</li>
+<li>Back out to the main Settings page and click <strong>Device</strong>.</li>
 <li>Select the method that you've connected the device to your intranet.</li>
-<li>If you're using Wi-Fi, select the network you're currently connected to.</li>
+<li>If you're using Wi-Fi, select Wi-Fi and then select the network you're currently connected to.</li>
 <li>Click on <strong>Status info</strong> and record your ip.</li>
 <li>If you're using ethernet select the Internet connection and record your ip.</li>
 </ul>
@@ -131,9 +131,11 @@ Once you have the ip of the device, you can connect to it using adb connect in a
 
 Sweet, we're now connected!
 
+If that didn't work and you have a micro-USB cable, try just manually connecting the Android TV to your computer with the USB cable.
+
 ### Run the app on Android TV
 
-Lets run the app on Android TV.  In Android studio select `checkpoint_0` and click run again.  This time the Android TV device should appear in the list of running devices.  Select it and click ok.
+Let's run the app on Android TV.  In Android studio select `checkpoint_0` and click run again.  This time the Android TV device should appear in the list of running devices.  Select it and click ok.
 
 And now the mobile app is running on Android TV.  It could use some TV UI love right?  In the next few steps we'll cover adding some Android TV UI to the existing data sources and video player.
 
@@ -146,7 +148,7 @@ And now the mobile app is running on Android TV.  It could use some TV UI love r
 
 In this step you've learned about:
 
-- Android TV and it's concepts
+- Android TV and its concepts
 - The codelab `checkpoint_0` base
 - How to connect to Android TV devices and deploy APKs
 
