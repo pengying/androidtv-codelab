@@ -62,7 +62,7 @@ The base sample app already uses `Picasso` so this should be done for you.  But 
     <pre>compile 'com.squareup.picasso:picasso:2.3.4'</pre>
 </aside>
 
-&rarr; Create an inner static class `PiccasoImageCardViewTarget` implementing `com.squareup.picasso.Target` and implement the methods: `onBitmapLoaded`, `onBitmapFailed` and `onPrepareLoad`.
+&rarr; Create an inner static class `PicassoImageCardViewTarget` implementing `com.squareup.picasso.Target` and implement the methods: `onBitmapLoaded`, `onBitmapFailed` and `onPrepareLoad`.
 
     static class PicassoImageCardViewTarget implements Target {
 
@@ -106,8 +106,7 @@ bitmap is loaded.
 
 We'll use a `ViewHolder` to store all of the data associated with the view.
 
-&rarr; As a child of `CardPresenter`, create an inner static class that extends `Presenter
-.ViewHolder`
+&rarr; As a child of `CardPresenter`, create an inner static class that extends `Presenter.ViewHolder`
 and create the default constructor.
 
     static class ViewHolder extends Presenter.ViewHolder {
@@ -176,7 +175,7 @@ We set the cardView `Focusable` and `FocusableInTouchMode` to true to enable
 it to be
 selected
 when browsing through the rows of content.  It's important to remember to set these fields to
-true when implementing Android TV for your app
+true when implementing Android TV for your app.
 </aside>
 
 Finally we set the `TextColor` of the ImageCardView to light gray.
@@ -207,7 +206,7 @@ And our `CardPresenter` is complete.  Let's fill out some `ListRows` with our vi
 In the `LeanbackBrowseFragment` let's create some sample categories.  Here we're defining them as constants, but in a real app you would probably pull them from your database.
 
     private static final String[] HEADERS = new String[]{
-        "Featured", "Popular","Editor's choice"
+        "Featured", "Popular", "Editor's choice"
     };
 
 Now in `init` after we've set the badge drawable we'll loop through the categories and create a row of content for each one.
@@ -226,7 +225,7 @@ In each row, we'll create an ObjectAdapter to define how to render the content t
             VideoDataManager manager = new VideoDataManager(getActivity(),
                     getLoaderManager(),
                     VideoItemContract.VideoItem.buildDirUri(),
-                    rowContents );
+                    rowContents);
             manager.startDataLoading();
 
             HeaderItem headerItem = new HeaderItem(position, HEADERS[position], null);
@@ -238,7 +237,7 @@ In each row, we'll create an ObjectAdapter to define how to render the content t
 
 Here, we'll update our VideoDataManager to manage the cursor for our ObjectAdapter.
 
-In `data/VideoDataManager add an ObjectAdapter to the class `VideoDataManager`.
+In `data/VideoDataManager` add an ObjectAdapter to the class `VideoDataManager`.
 
     private ObjectAdapter mItemList;
 
