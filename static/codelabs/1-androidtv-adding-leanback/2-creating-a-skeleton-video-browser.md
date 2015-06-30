@@ -8,33 +8,31 @@ In this step we'll put up the framework for the video browser fragment.  The key
 
 Let's get started.
 
-### Add Leanback dependencies
-
-We'll need to add a few dependencies to the build.gradle file before we can begin.
+### Leanback dependencies
 
 Open the `build.gradle (checkpoint_0)` file.
 
-Under dependencies add the following
+Under dependencies see the following dependencies exist:
 
     compile 'com.android.support:leanback-v17:21.+'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.android.support:cardview-v7:21.0.+'
 
-There are a few things to note here as well.  The Leanback libraries target API version 21 are only backwards compatible to API version 17.  For apps that require support for previous versions of Android, you should make sure that the code path utilizing libraries with higher minSdk does not run on devices with version < minSdk(library)
+There are a few things to note here.  The Leanback libraries target API version 21 are only backwards compatible to API version 17.  For apps that require support for previous versions of Android, you should make sure that the code path utilizing libraries with higher minSdk does not run on devices with version < minSdk(library)
 
-Next, lets take create a browsing activity.
+Next, let's take create a browsing activity.
 
 ### Create a browsing activity.
 
-In the Android Studio project explorer create a new package under `com.android.example.leanback` called `fastlane`.
+In the Android Studio project explorer create a new package under `com.android.example.leanback` by right-clicking the folder and clicking New -> Package. Name the new package `fastlane`.
 
 <img src="img/project_explorer.png">
 
-Under `fastlane` right click to create a new `Blank Activity` called `LeanbackActivity`, and click on Finish.
+Under `fastlane` right-click to create a new `Blank Activity` called `LeanbackActivity`, and click on Finish.
 
 <img src="img/create_leanback_activity.png">
 
-Once the class is created, delete the `menu/menu_leanback.xml` resource since it won't be used.  In the `LeanbackActivity` class, delete the `onCreateOptionsMenu` and `onOptionsItemSelected` functions.
+Once the class is created, delete the `menu/menu_leanback.xml` resource since it won't be used.  In the `LeanbackActivity` class, delete the `onCreateOptionsMenu` and `onOptionsItemSelected` functions. Also set the `LeanbackActivity` class to extend `Activity` instead of `ActionBarActivity`.
 
 ### Declare launcher activity for Android TV
 
@@ -103,17 +101,6 @@ Since certain features are not available on TV, you need to define their require
     <strong>android:required=&quot;false&quot;</strong>/&gt;
 </pre>
 </aside>
-
-### Add an Android TV app banner
-
-In the manifest, add `android:banner` under the application element to define the app banner.  The banner is the app launch point that appears on the home screen in the apps and games rows.
-
-<pre>
-&lt;application
-    android:allowBackup=&quot;true&quot;
-    android:icon=&quot;@drawable/ic_launcher&quot;
-    <strong>android:banner=&quot;@drawable/filmi_banner&quot;</strong>
-</pre>
 
 ### Create resource values for television
 
@@ -229,4 +216,4 @@ In this step you've learned about:
 
 ### Next up
 
-Lets finish the browse fragment.
+Let's finish the browse fragment.

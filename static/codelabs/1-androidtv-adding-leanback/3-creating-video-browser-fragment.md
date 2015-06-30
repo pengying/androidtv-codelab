@@ -36,7 +36,7 @@ We need to create a presenter to tie our `Video` model to the `ImageCardView`.
 
     private static Context mContext;
 
-&rarr; Implement the abstract methods `onCreateViewHolder`, `onBindViewHolder`, and `onUnbindViewHolder`.
+&rarr; Implement the currently-empty abstract methods `onCreateViewHolder`, `onBindViewHolder`, and `onUnbindViewHolder` in the `CardPresenter` class.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup) {
@@ -152,7 +152,7 @@ and create the default constructor.
                 .into(mImageCardViewTarget);
     }
 
-Now lets create the `ImageCardView` to hold and bind it with some data from the model.
+Now let's create the `ImageCardView` to hold and bind it with some data from the model.
 
 ### Create the ImageCardView
 
@@ -200,7 +200,7 @@ Make sure to include the `Video` class:
 
     import com.android.example.leanback.data.Video;
 
-And our `CardPresenter` is complete.  Lets fill out some `ListRows` with our video content.
+And our `CardPresenter` is complete.  Let's fill out some `ListRows` with our video content.
 
 ### Populate the videos
 
@@ -212,7 +212,7 @@ In the `LeanbackBrowseFragment` let's create some sample categories.  Here we're
 
 Now in `init` after we've set the badge drawable we'll loop through the categories and create a row of content for each one.
 
-In each row, we'll create an ObjectAdapter to define how to render the content that well pull from our database.  We'll load the videos, create a header, finally instantiating a `ListRow` with the header and video data and adding it to `mRowsAdapter`.
+In each row, we'll create an ObjectAdapter to define how to render the content that we'll pull from our database.  We'll load the videos, create a header, finally instantiating a `ListRow` with the header and video data and adding it to `mRowsAdapter`.
 
     public void init() {
         mRowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
@@ -311,4 +311,4 @@ In this step you've learned about:
 
 ### Next up
 
-Lets create the video details activity.
+Let's create the video details activity.

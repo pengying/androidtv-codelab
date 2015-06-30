@@ -14,7 +14,7 @@ In this step, you'll learn about:
 
 ### DetailsFragment concepts
 
-First lets cover some concepts about how the DetailsFragment works.  It functions very similarly to the BrowseFragment.
+First let's cover some concepts about how the DetailsFragment works.  It functions very similarly to the BrowseFragment.
 
 <figure layout vertical center>
  <img src="img/details_overview_row.png" width="600px">
@@ -32,14 +32,14 @@ All right, let's create a video detail view.
 
 ### Create a new activity VideoDetailsActivity
 
-The first step, create a new Activity to handle the detail fragment.
+The first step, create a new Blank Activity to handle the detail fragment.
 
 &rarr; Create an additional `Activity` `VideoDetailsActivity` under `fastlane`.  Name the layout
 file
 `activity_leanback_details`.
 
 &rarr; Just like when you created the `LeanbackActivity`, you'll need to delete the menu resources
-and menu related methods.
+and menu related methods and set it to extend `Activity` instead of `ActionBarActivity`.
 
 &rarr; Under layout, open `activity_leanback_details`.  Replace the default layout with the
 following.  Here, we're specifying that the Activity consists of a single fragment
@@ -55,7 +55,7 @@ following.  Here, we're specifying that the Activity consists of a single fragme
 
 Don't worry about the errors we'll work on creating the Fragment in an upcoming step.
 
-Now that we have the activity framework, lets add the Leanback style to the activity declaration
+Now that we have the activity framework, let's add the Leanback style to the activity declaration
 in the manifest.
 
 ### Update Activity theme in the manifest
@@ -94,7 +94,7 @@ In `VideoDetailsFragment`, we need to do several things:
 * Add a `ListRow` for recommended items
 * Handle user actions
 
-Lets start by getting the selected video from the intent.  We'll override `onCreate` and get the
+Let's start by getting the selected video from the intent.  We'll override `onCreate` and get the
 video from the intent.
 
 
@@ -124,7 +124,7 @@ Before we get the image and create the `DetailsOverviewRow` we need to define a 
         Video video = (Video) o;
 
         if (video != null) {
-            Log.d("DetailsDescriptionPresenter", String.format("%s, %s, %s", video.getTitle(), video.getThumbUrl(), video.getDescription()));
+            Log.d("Presenter", String.format("%s, %s, %s", video.getTitle(), video.getThumbUrl(), video.getDescription()));
             viewHolder.getTitle().setText(video.getTitle());
             viewHolder.getSubtitle().setText(String.valueOf(video.getRating()));
             viewHolder.getBody().setText(video.getDescription());
@@ -263,7 +263,7 @@ When we're done, the onPostExecute method should look like the following:
             public void onActionClicked(Action action) {
                 if (action.getId() == ACTION_PLAY) {
                     Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                    intent.putExtra(LeanbackActivity.VIDEO, selectedVideo);
+                    intent.putExtra(Video.INTENT_EXTRA_VIDEO, selectedVideo);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), action.toString(), Toast.LENGTH_SHORT).show();
